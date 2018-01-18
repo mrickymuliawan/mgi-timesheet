@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 19, 2017 at 01:00 PM
+-- Generation Time: Jan 18, 2018 at 01:42 PM
 -- Server version: 10.1.8-MariaDB
 -- PHP Version: 5.6.14
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `mgi2`
+-- Database: `mgi`
 --
 
 -- --------------------------------------------------------
@@ -143,6 +143,13 @@ CREATE TABLE `tbl_timesheet` (
   `id_job` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tbl_timesheet`
+--
+
+INSERT INTO `tbl_timesheet` (`id_timesheet`, `npwp`, `bulan`, `tahun`, `periode`, `total_jamkerja`, `total_lembur`, `total_ope`, `total_uanglembur`, `total_transport_lembur`, `total_uang_makan`, `pic`, `status`, `id_perusahaan`, `id_job`) VALUES
+(1, 'willy@gmail.com', '12', '2017', '1', 0, 0, 0, 0, 0, 0, '', '', 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -174,6 +181,8 @@ CREATE TABLE `tbl_user` (
   `jabatan` varchar(20) NOT NULL,
   `gaji_pokok` int(11) NOT NULL,
   `tunjangan_transport` int(11) NOT NULL,
+  `tunjangan_komunikasi` int(11) NOT NULL,
+  `tunjangan_parkir` int(11) NOT NULL,
   `role` enum('administrator','user','supervisor') NOT NULL,
   `status` enum('aktif','tidakaktif') NOT NULL,
   `uang_lembur1` int(11) NOT NULL,
@@ -184,10 +193,9 @@ CREATE TABLE `tbl_user` (
 -- Dumping data for table `tbl_user`
 --
 
-INSERT INTO `tbl_user` (`npwp`, `nama_user`, `saldo_cuti`, `password`, `jabatan`, `gaji_pokok`, `tunjangan_transport`, `role`, `status`, `uang_lembur1`, `uang_lembur2`) VALUES
-('41814010091', 'ricky muliawan', 0, 'b87ec07f31bcaef5af9cebaae3342b00cce180fc', 'manager', 0, 0, 'administrator', 'aktif', 0, 0),
-('41814010092', 'willy dwi', 16, '98940e1a1c159ebd65f123b65cfe080b2bbc3510', 'junior auditor', 3000000, 50000, 'user', 'aktif', 26012, 34682),
-('41814010093', 'gifari ahmad', 16, 'eefad1107a0dfc9d4af8ea348d95e016d6ca70e0', 'senior auditor', 5000000, 50000, 'supervisor', 'aktif', 43353, 57803);
+INSERT INTO `tbl_user` (`npwp`, `nama_user`, `saldo_cuti`, `password`, `jabatan`, `gaji_pokok`, `tunjangan_transport`, `tunjangan_komunikasi`, `tunjangan_parkir`, `role`, `status`, `uang_lembur1`, `uang_lembur2`) VALUES
+('ricky@gmail.com', 'ricky muliawan', 0, '4859a83d3a3227f89091e261cc762e779022550d', 'manager', 0, 0, 0, 0, 'administrator', 'aktif', 0, 0),
+('willy@gmail.com', 'willy dwi', 8, '05c3c54a9161d78b940415f15816d9072ab5af02', 'junior', 3000000, 50000, 100000, 100000, 'user', 'aktif', 26012, 34682);
 
 --
 -- Indexes for dumped tables
@@ -235,7 +243,7 @@ ALTER TABLE `tbl_perusahaan`
 -- AUTO_INCREMENT for table `tbl_timesheet`
 --
 ALTER TABLE `tbl_timesheet`
-  MODIFY `id_timesheet` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_timesheet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
