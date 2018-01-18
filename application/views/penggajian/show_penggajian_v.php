@@ -290,6 +290,18 @@
 								<div class="col-md-3">
 									<input type="text" name='totalgaji' class="text-green form-control input-lg number-format" readonly="true">
 								</div>
+                <div class="col-md-4">
+                	<div class="form-check form-check-inline">
+										  <input class="form-check-input" type="checkbox" name="tunjanganparkir" id="tunjparkir">
+										  <label class="form-check-label" for="tunjparkir">include Tunjangan Parkir</label>
+										</div>
+								</div>
+								<div class="col-md-4">
+                    <div class="form-check form-check-inline">
+										  <input class="form-check-input" type="checkbox" name="tunjangankomunikasi" id="tunjkom">
+										  <label class="form-check-label" for="tunjkom">include Tunjangan Komunikasi</label>
+										</div>
+								</div>
 							</div>
 						</form>
 					
@@ -298,6 +310,7 @@
 				 </div>
 			</div>
 			<div class="modal-footer">
+				
 				<a class="btn btn-outline-primary btn-print" target="_blank">Print <i class="fa fa-print"></i></a>
 				<a class='btn btn-outline-success btn-login' href=''>
 					Login   <i class='fa fa-sign-in'></i> 
@@ -356,6 +369,8 @@
 
 					$('.modal-timesheet input[name=transportlembur]').val(data['detailtimesheet']['total_transportlembur']);
 					$('.modal-timesheet input[name=tunjangantransport]').val(data['detailtimesheet']['total_tunjangantransport']);
+					$('.modal-timesheet input[name=tunjanganparkir]').val(data['detailtimesheet']['tunjangan_parkir']);
+					$('.modal-timesheet input[name=tunjangankomunikasi]').val(data['detailtimesheet']['tunjangan_komunikasi']);
 
 					$('.modal-timesheet input[name=uangope1]').val(data['detailtimesheet']['ope1']);
 					$('.modal-timesheet input[name=uangope2]').val(data['detailtimesheet']['ope2']);
@@ -435,6 +450,15 @@
 		loadreporttab(npwp,1)
 		loadreporttab(npwp,2)
 	})
-
+	$('input[name=tunjangankomunikasi], input[name=tunjanganparkir').change(function(){
+		var val=parseInt($(this).val());
+		var gaji=parseInt($('input[name=totalgaji]').val());
+		if ($(this).prop('checked')) {
+			$('input[name=totalgaji]').val(gaji+val);
+		}
+		else{
+			$('input[name=totalgaji]').val(gaji-val);
+		}
+	})
 	
 </script>
