@@ -59,9 +59,30 @@ class timesheet_m extends CI_Model {
 
 	//  JAMKERJA
 	public function geteditjaker($id,$tgl){
-		$where= array('id_timesheet' => $id, 'tanggal' => $tgl);
-		$result=$this->db->get_where('tbl_timesheetdetail',$where);
-		return $result->row_array();
+		// $where= array('id_timesheet' => $id, 'tanggal' => $tgl);
+		// $result=$this->db->get_where('tbl_timesheetdetail',$where);
+		// return $result->row_array();
+		$result=array();
+		$query=$this->db->query("select * from tbl_perusahaandetail where id_perusahaan=
+(select id_perusahaan from tbl_timesheet where id_timesheet='$id')");
+		$kota=$query->result_array();
+		$res='';
+		$i=1;
+		foreach ($kota as $key => $value) {
+			if ($i==1) {
+				
+				$res.="<option value='$value[id_perusahaandetail]' selected>$value[kota] - OPE: $value[ope]</option>";
+			}
+			else{
+				$res.="<option value='$value[id_perusahaandetail]'>$value[kota] - OPE: $value[ope]</option>";
+
+			}
+			$i++;
+		}
+		$result['kota']=$res;
+		$query=$this->db->query("select * from tbl_timesheetdetail where id_timesheet='$id' and tanggal='$tgl'");
+		$result['detail']=$query->row_array();
+		return $result;
 	}
 	public function editjaker($id,$data,$tgl,$bulan,$tahun,$npwp,$periode)
 	{	
@@ -270,11 +291,10 @@ class timesheet_m extends CI_Model {
 		set ts.total_jamkerja=td.totjaker where id_timesheet=$id");
 		// update total ope
 		$this->db->query
-		("update tbl_timesheet t1,
-			(select ope from tbl_timesheet t11 inner join tbl_perusahaan t22
-			on t11.id_perusahaan=t22.id_perusahaan where id_timesheet=$id) t2,
-			(select count(jam_kerja) totjaker from tbl_timesheetdetail where id_timesheet=$id and tipe_kerja='client') t3 
-			set t1.total_ope=(t3.totjaker*t2.ope) where id_timesheet=$id
+		("update tbl_timesheet main,
+		(select sum(psd.ope)totope from tbl_timesheetdetail tsd join tbl_perusahaandetail psd
+		on tsd.id_perusahaandetail=psd.id_perusahaandetail where id_timesheet='$id') sub1
+			set main.total_ope=sub1.totope where id_timesheet='$id'
 			");
 		// update total lembur / cuti jika minus
 		$this->db->query

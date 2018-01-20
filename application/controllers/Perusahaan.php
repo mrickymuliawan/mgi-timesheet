@@ -22,9 +22,6 @@ class Perusahaan extends CI_Controller {
 			$r=array();
 			$r[]=$key+1;
 			$r[]=$value['nama_perusahaan'];
-			$r[]=$value['alamat'];
-			$r[]=$value['kota'];
-			$r[]="<span class='number-format2'>Rp. $value[ope]</span>";
 			$r[]="<span class='number-format2'>Rp. $value[fee]</span>";
 
 			$r[]="<button class='btn btn-outline-info btn-sm btn-edit' value='$value[id_perusahaan]'
@@ -52,17 +49,25 @@ class Perusahaan extends CI_Controller {
 	public function add()
 	{
 		$namaperusahaan=$this->input->get_post('namaperusahaan');
-		$alamat=$this->input->get_post('alamat');
-		$kota=$this->input->get_post('kota');
-		$ope=$this->input->get_post('ope');
 		$fee=$this->input->get_post('fee');
+		$jumlahkota=$this->input->get_post('jumlahkota');
 		$data = array(
 									'nama_perusahaan' => $namaperusahaan,
-									'alamat' => $alamat,
-									'kota' => $kota,
-									'ope' => $ope,
+									'jumlah_kota' => $jumlahkota,
 									'fee' => $fee);
 		$this->perusahaan_m->insert($data);
+
+		//input to tbl_perusahaandetail
+		$lastrow=$this->db->query("select * from tbl_perusahaan order by id_perusahaan desc limit 1")->row_array();
+		for ($i=1; $i <= $jumlahkota ; $i++) { 
+			$data = array(
+							'id_perusahaan' => $lastrow['id_perusahaan'],
+ 							'alamat' => $this->input->get_post("alamat$i"),
+							'kota' => $this->input->get_post("kota$i"),
+							'ope' => $this->input->get_post("ope$i"),
+							'no_kota' => $i);
+			$this->perusahaan_m->insert_detail($data);
+		}
 	}
 
 	// MENGAMBIL id, BISA DENGAN AJAX URL ATAU AJAX DATA
@@ -78,19 +83,26 @@ class Perusahaan extends CI_Controller {
 	{
 		$id=$this->input->get_post('idperusahaan');
 		$namaperusahaan=$this->input->get_post('namaperusahaan');
-		$alamat=$this->input->get_post('alamat');
-		$kota=$this->input->get_post('kota');
-		$ope=$this->input->get_post('ope');
 		$fee=$this->input->get_post('fee');
-		$data = array('id_perusahaan' => $id,
+		$jumlahkota=$this->input->get_post('jumlahkota');
+		$data = array(
+									'id_perusahaan' => $id,
 									'nama_perusahaan' => $namaperusahaan,
-									'alamat' => $alamat,
-									'kota' => $kota,
-									'ope' => $ope,
+									'jumlah_kota' => $jumlahkota,
 									'fee' => $fee);
 		$this->perusahaan_m->edit($id,$data);
-	}
 
+		// perusahaan detaul
+		for ($i=1; $i <= $jumlahkota ; $i++) { 
+			$data = array(
+							'id_perusahaan' => $id,
+ 							'alamat' => $this->input->get_post("alamat$i"),
+							'kota' => $this->input->get_post("kota$i"),
+							'ope' => $this->input->get_post("ope$i"),
+							'no_kota' => $i);
+			$this->perusahaan_m->edit_detail($id,$data);
+		}
+	}
 	// MENGAMBIL id, BISA DENGAN AJAX URL ATAU AJAX DATA
 	public function delete($id='dipakai sesuai ajax')
 	{

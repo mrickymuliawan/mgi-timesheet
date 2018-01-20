@@ -346,6 +346,7 @@
 	        			<input type="text" name="namaperusahaan" class="form-control" readonly="">
 	        		</div>
 	        	</div>
+	        	
 	        	<div class="form-group">
 	        		<label class="control-label col-sm-4">Jam Kerja</label>
 	        		<div class="col-sm-8">
@@ -353,18 +354,33 @@
 	        		</div>
 	        	</div>
 	        	<div class="form-group">
-	        		<label class="control-label col-sm-4">Periode</label>
+	        		<label class="control-label col-sm-4">Kota</label>
 	        		<div class="col-sm-8">
-	        			<input type="text" name="periode" class="form-control" value="1" readonly="">
+	        			<select name="idperusahaandetail" class="form-control">
+	        				
+	        			</select>
 	        		</div>
 	        	</div>
 	        	<div class="form-group">
-	        		<label class="control-label col-sm-4">Tanggal</label>
+	        		<label class="control-label col-sm-4">OPE</label>
 	        		<div class="col-sm-8">
+	        			<input type="text" name="ope" class="form-control" readonly="">
+	        		</div>
+	        	</div>
+	        	<div class="form-group">
+	        		<label class="control-label col-sm-4">Periode</label>
+	        		<div class="col-sm-3">
+	        			<input type="text" name="periode" class="form-control" value="1" readonly="">
+	        		</div>
+	        		<label class="control-label col-sm-2">Tanggal</label>
+	        		<div class="col-sm-3">
 	        			<input type="number" name="tanggal" class="form-control" readonly="">
 	        			<input type="hidden" name="idtimesheet" class="form-control">
 	        			<input type="hidden" name="jenishari" class="form-control">
 	        		</div>
+	        	</div>
+	        	<div class="form-group">
+	        		
 	        	</div>
 	        	<div class="form-group">
 	        		<label class="control-label col-sm-4">Tipe Kerja</label>	        		
@@ -683,12 +699,14 @@ $('.table-timesheet tbody').on('click','.td-jamkerja',function(){
 		data:{idtimesheet:idtimesheet,tanggal:tanggal,jenishari:jenishari},
 		dataType:'json',
 		success:function(data){
-	  	if (data!=null) {
+			$('.modal-editjam select[name=idperusahaandetail]').html(data.kota);
+			// alert(data['detail']['jam_kerja'])
+	  	if (data['detail']!=null) {
 	  		
-	  		$('.modal-editjam input[name=jamkerja]').val(data.jam_kerja);
-	  		$('.modal-editjam select[name=tipekerja]').val(data.tipe_kerja);
-				$('.modal-editjam input[name=uangmakan]').val(data.uang_makan);
-				$('.modal-editjam input[name=transportlembur]').val(data.transport_lembur);
+	  		$('.modal-editjam input[name=jamkerja]').val(data['detail']['jam_kerja']);
+	  		$('.modal-editjam select[name=tipekerja]').val(data['detail']['tipe_kerja']);
+				$('.modal-editjam input[name=uangmakan]').val(data['detail']['uang_makan']);
+				$('.modal-editjam input[name=transportlembur]').val(data['detail']['transport_lembur']);
 	  	}	
 	  	// show modal
 			$('.modal-editjam').modal('show');

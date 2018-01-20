@@ -128,9 +128,10 @@ class Billing extends CI_Controller {
 		$idjob=$this->input->get_post('idjob');
 		$table=$this->db->
 		query("select nama_user,tanggal,bulan,tahun,td.transport_lembur,td.uang_makan,ope,pic,ts.status 
-						from tbl_timesheet ts 
+						from tbl_timesheetdetail td 
+						join tbl_timesheet ts  on td.id_timesheet=ts.id_timesheet
 						join tbl_perusahaan pr on ts.id_perusahaan=pr.id_perusahaan 
-						join tbl_timesheetdetail td  on ts.id_timesheet=td.id_timesheet
+						join tbl_perusahaandetail prd on td.id_perusahaandetail=prd.id_perusahaandetail
 						join tbl_user us on ts.npwp=us.npwp 
 						where 
 						id_job='$idjob'
@@ -219,9 +220,10 @@ class Billing extends CI_Controller {
 			
 			$table=$this->db->
 			query("select nama_user,tanggal,bulan,tahun,td.transport_lembur,td.uang_makan,ope,pic,ts.status 
-							from tbl_timesheet ts 
+							from tbl_timesheetdetail td 
+							join tbl_timesheet ts  on td.id_timesheet=ts.id_timesheet
 							join tbl_perusahaan pr on ts.id_perusahaan=pr.id_perusahaan 
-							join tbl_timesheetdetail td  on ts.id_timesheet=td.id_timesheet
+							join tbl_perusahaandetail prd on td.id_perusahaandetail=prd.id_perusahaandetail
 							join tbl_user us on ts.npwp=us.npwp 
 							where
 							id_job='$idjob'

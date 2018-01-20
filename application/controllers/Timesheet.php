@@ -26,7 +26,7 @@ class timesheet extends CI_Controller {
 		// membuat thead table timesheet 				--------------> THEAD
 		$thead="<tr class='nama-hari'>
 							<th>Nama Perusahaan</th>
-							<th>OPE</th>";
+							";
 		for ($i=0; $i < 15; $i++) {
 			$tanggal=$i+1; 
 			if (in_array($i+1, $libur)) {
@@ -66,7 +66,7 @@ class timesheet extends CI_Controller {
 				$tbody="<tr>";
 
 				$timesheet=$this->db->query
-				("select pr.nama_perusahaan, pr.ope, tm.id_timesheet,
+				("select pr.nama_perusahaan, tm.id_timesheet,
 								 pr.id_perusahaan,total_jamkerja,total_ope,pic,status 
 				from tbl_perusahaan pr inner join tbl_timesheet tm on pr.id_perusahaan = tm.id_perusahaan 
 				where tm.id_timesheet=$array[$i]")->row_array();
@@ -77,7 +77,7 @@ class timesheet extends CI_Controller {
 				$tbody.="<td class='td-idtimesheet td-hover'>$timesheet[nama_perusahaan]
 										 <input type='hidden' value='$timesheet[id_timesheet]' name='idtimesheet'>
 										 <input type='hidden' value='$timesheet[nama_perusahaan]' name='namaperusahaan'></td>
-										 <td>Rp. <span class='number-format2'>$timesheet[ope]</span></td>";
+										 ";
 
 				for ($j=1; $j <=15 ; $j++) { 
 					$timesheetdetail=$this->db->query
@@ -120,7 +120,7 @@ class timesheet extends CI_Controller {
 				from tbl_timesheet where bulan=$bulan and periode=1 and tahun=$tahun and npwp='$npwp'")->row_array();
 			
 			// tfoot total lembur
-			$tfoot="<tr><th colspan='2' >Overtime</th>";
+			$tfoot="<tr><th colspan='1' >Overtime</th>";
 			for ($i=1; $i <=15 ; $i++) { 
 				// total lembur per tanggal
 				$totlembur=$this->db->query
@@ -144,7 +144,7 @@ class timesheet extends CI_Controller {
 			$data['tfoot'][]=$tfoot;
 
 			// tfoot total jam kerja
-			$tfoot="<tr><th colspan='2' >Total</th>";	
+			$tfoot="<tr><th colspan='1' >Total</th>";	
 			for ($i=1; $i <=15 ; $i++) { 
 				// total jam kerja per tanggal
 				$totjaker=$this->db->query
@@ -177,7 +177,7 @@ class timesheet extends CI_Controller {
 		else{
 			$thead="<tr class='nama-hari'>
 								<th>Nama Perusahaan</th>
-								<th>OPE</th>";
+								";
 			for ($i=0; $i < 15; $i++) { 
 				$tanggal=$i+1; 
 				if (in_array($i+1, $libur)) {
@@ -218,7 +218,7 @@ class timesheet extends CI_Controller {
 		// membuat thead table timesheet 					--------------> THEAD
 		$thead="<tr class='nama-hari'>
 							<th>Nama Perusahaan</th>
-							<th>OPE</th>";
+							";
 		for ($i=15; $i < $lastday; $i++) {
 			$tanggal=$i+1;  
 			if (in_array($i+1, $libur) ) {
@@ -256,7 +256,7 @@ class timesheet extends CI_Controller {
 				$tbody="<tr>";
 
 				$timesheet=$this->db->query
-				("select pr.nama_perusahaan, pr.ope, tm.id_timesheet,
+				("select pr.nama_perusahaan, tm.id_timesheet,
 								 pr.id_perusahaan,total_jamkerja,total_ope,pic,status 
 				from tbl_perusahaan pr inner join tbl_timesheet tm on pr.id_perusahaan = tm.id_perusahaan 
 				where tm.id_timesheet=$array[$i]")->row_array();
@@ -267,7 +267,7 @@ class timesheet extends CI_Controller {
 				$tbody.="<td class='td-idtimesheet td-hover'>$timesheet[nama_perusahaan]
 										 <input type='hidden' value='$timesheet[id_timesheet]' name='idtimesheet'>
 										 <input type='hidden' value='$timesheet[nama_perusahaan]' name='namaperusahaan'></td>
-										 <td>Rp. <span class='number-format2'>$timesheet[ope]</span></td>";
+										 ";
 
 				for ($j=16; $j <=$lastday ; $j++) { 
 					$timesheetdetail=$this->db->query
@@ -308,7 +308,7 @@ class timesheet extends CI_Controller {
 			("select sum(total_lembur)totallembur, sum(total_jamkerja)totaljaker, sum(total_ope)totalope  
 				from tbl_timesheet where bulan=$bulan and periode=2 and tahun=$tahun and npwp='$npwp'")->row_array();
 			// tfoot total lembur
-			$tfoot="<tr><th colspan='2' >Overtime</th>";
+			$tfoot="<tr><th colspan='1' >Overtime</th>";
 			for ($i=16; $i <=$lastday ; $i++) { 
 				// total lembur per tanggal
 				$totlembur=$this->db->query
@@ -332,7 +332,7 @@ class timesheet extends CI_Controller {
 			$data['tfoot'][]=$tfoot;
 
 			// tfoot total jam kerja
-			$tfoot="<tr><th colspan='2' >Total</th>";	
+			$tfoot="<tr><th colspan='1' >Total</th>";	
 			for ($i=16; $i <=$lastday ; $i++) { 
 				// total jam kerja per tanggal
 				$totjaker=$this->db->query
@@ -361,7 +361,7 @@ class timesheet extends CI_Controller {
 
 			$thead="<tr class='nama-hari'>
 								<th>Nama Perusahaan</th>
-								<th>OPE</th>";
+								";
 			for ($i=15; $i < $lastday; $i++) { 
 				$tanggal=$i+1; 
 				if (in_array($i+1, $libur)) {
@@ -391,9 +391,11 @@ class timesheet extends CI_Controller {
 		$bulan=$this->input->get('bulan'); 
 		$tahun=$this->input->get('tahun');
 		$table=$this->db->
-		query("select tanggal,nama_perusahaan,kota,td.transport_lembur,td.uang_makan,ope,pic,status from tbl_timesheet ts 
+		query("select tanggal,nama_perusahaan,kota,td.transport_lembur,td.uang_makan,ope,pic,status 
+					from tbl_timesheetdetail td 
+					join tbl_timesheet ts  on td.id_timesheet=ts.id_timesheet
 					join tbl_perusahaan pr on ts.id_perusahaan=pr.id_perusahaan 
-					join tbl_timesheetdetail td  on ts.id_timesheet=td.id_timesheet
+					join tbl_perusahaandetail prd on td.id_perusahaandetail=prd.id_perusahaandetail
 					where 
 					npwp='$npwp' && bulan='$bulan' && tahun='$tahun' && periode='$periode'
 					&& ((tipe_kerja='client') or (transport_lembur > 0 or uang_makan > 0)) 
@@ -560,6 +562,7 @@ class timesheet extends CI_Controller {
 		$periode=$this->input->get_post('periode');
 		$uangmakan=$this->input->get_post('uangmakan');
 		$transportlembur=$this->input->get_post('transportlembur');
+		$idperusahaandetail=$this->input->get_post('idperusahaandetail');
 		$data = array('id_timesheet' => $idtimesheet,
 									'jam_kerja' => $jamkerja,
 									'tanggal' => $tanggal,
@@ -567,7 +570,8 @@ class timesheet extends CI_Controller {
 									'tipe_kerja' => $tipekerja,
 									'jenis_hari' => $jenishari,
 									'transport_lembur' => $transportlembur,
-									'uang_makan' => $uangmakan);
+									'uang_makan' => $uangmakan,
+									'id_perusahaandetail' => $idperusahaandetail);
 		
 		$this->timesheet_m->editjaker($idtimesheet,$data,$tanggal,$bulan,$tahun,$npwp,$periode);
 		
@@ -675,7 +679,7 @@ class timesheet extends CI_Controller {
 			// membuat thead table timesheet 				--------------> THEAD
 			$thead="<tr class='nama-hari'>
 								<th>Nama Perusahaan</th>
-								<th>OPE</th>";
+								";
 			for ($i=0; $i < 15; $i++) {
 				$tanggal=$i+1; 
 				$namahari=$this->db->query("select nama_hari,keterangan from tbl_libur where npwp='$npwp' and tanggal='$tahun/$bulan/$tanggal'")->row_array();
@@ -720,7 +724,7 @@ class timesheet extends CI_Controller {
 					$tbody.="<tr>";
 
 					$timesheet=$this->db->query
-					("select pr.nama_perusahaan, pr.ope, tm.id_timesheet,
+					("select pr.nama_perusahaan, tm.id_timesheet,
 						pr.id_perusahaan,total_jamkerja,tm.total_ope,pic,tm.status 
 						from tbl_perusahaan pr inner join tbl_timesheet tm on pr.id_perusahaan = tm.id_perusahaan
 						inner join tbl_job tj on tm.id_job = tj.id_job 
@@ -732,7 +736,7 @@ class timesheet extends CI_Controller {
 					$tbody.="	<td class='td-idtimesheet td-hover'>$timesheet[nama_perusahaan]
 											<input type='hidden' value='$timesheet[id_timesheet]' name='idtimesheet'>
 											<input type='hidden' value='$timesheet[nama_perusahaan]' name='namaperusahaan'></td>
-										<td>Rp. <span class='number-format3'>$timesheet[ope]</span></td>";
+										</td>";
 
 					for ($j=1; $j <=15 ; $j++) { 
 						$timesheetdetail=$this->db->query
@@ -771,7 +775,7 @@ class timesheet extends CI_Controller {
 					from tbl_timesheet where bulan=$bulan and periode=1 and tahun=$tahun and npwp='$npwp'")->row_array();
 				
 				// tfoot total lembur
-				$tfoot="<tr><th colspan='2'>Overtime</th>";
+				$tfoot="<tr><th colspan='1'>Overtime</th>";
 				for ($i=1; $i <=15 ; $i++) { 
 					// total lembur per tanggal
 					$totlembur=$this->db->query
@@ -795,7 +799,7 @@ class timesheet extends CI_Controller {
 				$data['tfoot']=$tfoot;
 
 				// tfoot total jam kerja
-				$tfoot="<tr><th colspan='2'>Total</th>";	
+				$tfoot="<tr><th colspan='1'>Total</th>";	
 				for ($i=1; $i <=15 ; $i++) { 
 					// total jam kerja per tanggal
 					$totjaker=$this->db->query
@@ -830,8 +834,8 @@ class timesheet extends CI_Controller {
 
 				$thead="<tr class='nama-hari'>
 									<th>Nama Perusahaan</th>
-									<th>OPE</th>";
-				for ($i=1; $i <= 15; $i++) { 
+									";
+				for ($i=0; $i < 15; $i++) { 
 					$tanggal=$i+1; 
 					if (in_array($i+1, $libur)) {
 					  $thead.="<th class='td-libur td-disabled'><p>$tanggal</p> $hari[$i]</th>";
@@ -871,7 +875,7 @@ class timesheet extends CI_Controller {
 			// membuat thead table timesheet 					--------------> THEAD
 			$thead="<tr class='nama-hari'>
 								<th>Nama Perusahaan</th>
-								<th>OPE</th>";
+								";
 			for ($i=15; $i < $lastday; $i++) {
 				$tanggal=$i+1; 
 				$namahari=$this->db->query("select nama_hari,keterangan from tbl_libur where npwp='$npwp' and tanggal='$tahun/$bulan/$tanggal'")->row_array(); 
@@ -914,7 +918,7 @@ class timesheet extends CI_Controller {
 					$tbody.="<tr>";
 
 					$timesheet=$this->db->query
-					("select pr.nama_perusahaan, pr.ope, tm.id_timesheet,
+					("select pr.nama_perusahaan, tm.id_timesheet,
 						pr.id_perusahaan,total_jamkerja,tm.total_ope,pic,tm.status 
 						from tbl_perusahaan pr inner join tbl_timesheet tm on pr.id_perusahaan = tm.id_perusahaan
 						inner join tbl_job tj on tm.id_job = tj.id_job 
@@ -926,7 +930,7 @@ class timesheet extends CI_Controller {
 					$tbody.="	<td class='td-idtimesheet td-hover'>$timesheet[nama_perusahaan]
 											<input type='hidden' value='$timesheet[id_timesheet]' name='idtimesheet'>
 											<input type='hidden' value='$timesheet[nama_perusahaan]' name='namaperusahaan'></td>
-										<td>Rp. <span class='number-format2'>$timesheet[ope]</span></td>";
+										";
 
 					for ($j=16; $j <=$lastday ; $j++) { 
 						$timesheetdetail=$this->db->query
@@ -963,7 +967,7 @@ class timesheet extends CI_Controller {
 				("select sum(total_lembur)totallembur, sum(total_jamkerja)totaljaker, sum(total_ope)totalope  
 					from tbl_timesheet where bulan=$bulan and periode=2 and tahun=$tahun and npwp='$npwp'")->row_array();
 				// tfoot total lembur
-				$tfoot="<tr><th colspan='2'>Overtime</th>";
+				$tfoot="<tr><th colspan='1'>Overtime</th>";
 				for ($i=16; $i <=$lastday ; $i++) { 
 					// total lembur per tanggal
 					$totlembur=$this->db->query
@@ -987,7 +991,7 @@ class timesheet extends CI_Controller {
 				$data['tfoot']=$tfoot;
 
 				// tfoot total jam kerja
-				$tfoot="<tr><th colspan='2'>Total</th>";	
+				$tfoot="<tr><th colspan='1'>Total</th>";	
 				for ($i=16; $i <=$lastday ; $i++) { 
 					// total jam kerja per tanggal
 					$totjaker=$this->db->query
@@ -1019,7 +1023,7 @@ class timesheet extends CI_Controller {
 
 				$thead="<tr class='nama-hari'>
 									<th>Nama Perusahaan</th>
-									<th>OPE</th>";
+									";
 				for ($i=15; $i < $lastday; $i++) { 
 					$tanggal=$i+1; 
 					if (in_array($i+1, $libur)) {
