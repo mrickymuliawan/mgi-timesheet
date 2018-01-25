@@ -17,7 +17,7 @@
 			<label class="control-label col-sm-1">Periode: </label>
 			<div class="col-md-2">
 				<select class="form-control" name="bulan">
-					<option value="alltime">All Time</option>
+					<option value="alltime" selected="true">All Time</option>
 					<option value="1">Januari</option>
 					<option value="2">Februari</option>
 					<option value="3">Maret</option>

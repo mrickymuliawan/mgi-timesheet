@@ -48,7 +48,7 @@ class billing_m extends CI_Model {
 											'12' => 'Desember');
 
 		$query=$this->db->query
-		("select jb.id_job,concat('$bulantext[$bulan] $tahun')periode,jb.nama_perusahaan,fee,job_number,sum(total_ope)totope,sum(total_transport_lembur)tottranslembur,sum(total_uang_makan)totuangmakan 
+		("select jb.id_job,DATE_FORMAT(tanggal_mulai,'%d %M %Y')periode,jb.nama_perusahaan,fee,job_number,sum(total_ope)totope,sum(total_transport_lembur)tottranslembur,sum(total_uang_makan)totuangmakan 
 			from tbl_job jb
 			inner join tbl_timesheet ts
 			on jb.id_job=ts.id_job

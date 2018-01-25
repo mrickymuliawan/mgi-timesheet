@@ -399,7 +399,7 @@ class timesheet extends CI_Controller {
 					where 
 					npwp='$npwp' && bulan='$bulan' && tahun='$tahun' && periode='$periode'
 					&& ((tipe_kerja='client') or (transport_lembur > 0 or uang_makan > 0)) 
-					order by tanggal ")->result_array();
+					 ")->result_array();
 		$total=$this->db->
 		query("select sum(total_transport_lembur) tlembur, sum(total_uang_makan) tumakan, sum(total_ope) tope 
 					from tbl_timesheet
@@ -1066,7 +1066,7 @@ class timesheet extends CI_Controller {
 						where 
 						npwp='$npwp' && bulan='$bulan' && tahun='$tahun' && periode='$periode'
 						&& ((tipe_kerja='client') or (transport_lembur > 0 or uang_makan > 0)) 
-						order by tanggal ")->result_array();
+						 ")->result_array();
 			$detail=$this->db->
 			query("select sum(total_transport_lembur) tlembur, sum(total_uang_makan) tumakan,
 			 			sum(total_ope) tope 

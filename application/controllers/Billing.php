@@ -136,7 +136,7 @@ class Billing extends CI_Controller {
 						where 
 						id_job='$idjob'
 						&& ((tipe_kerja='client') or (transport_lembur > 0 or uang_makan > 0)) 
-						order by tanggal ")->result_array();
+						 ")->result_array();
 		$total=$this->db->
 		query("select sum(total_transport_lembur) tlembur, sum(total_uang_makan) tumakan, sum(total_ope) tope 
 					from tbl_timesheet
@@ -228,7 +228,7 @@ class Billing extends CI_Controller {
 							where
 							id_job='$idjob'
 							&& ((tipe_kerja='client') or (transport_lembur > 0 or uang_makan > 0)) 
-							order by tanggal ")->result_array();
+							 ")->result_array();
 			$detail=$this->billing_m->getdetailbilling($idjob,$bulan,$tahun);
 			$total=$this->db->
 			query("select sum(total_transport_lembur) tlembur, sum(total_uang_makan) tumakan, 
