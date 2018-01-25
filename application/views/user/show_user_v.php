@@ -27,7 +27,7 @@
 		<div class="row">
 			<div class="col-md-12 table-responsive">
 				<ul class="nav nav-tabs">
-				  <li class="active"><a data-toggle="tab" href="#user">User</a></li>
+				  <li class="active"><a data-toggle="tab" href="#user">User / Supervisor</a></li>
 				  <li><a data-toggle="tab" href="#admin">Admin</a></li>
 				</ul>
 
@@ -42,7 +42,6 @@
 									<th>Nama user</th>
 									<th>Jabatan</th>
 									<th>Gaji Pokok</th>
-									<th>Tunjangan Transport</th>
 									<th>Role</th>
 									<th>Status</th>
 									<th>Saldo Cuti</th>
@@ -136,8 +135,8 @@
             <input type="text" class="form-control" name="jabatan">
           </div>
         </div>
-       
-         <div class="form-group">
+       	<div class="uangtunjangan">
+       		<div class="form-group">
           <label for="gapok" class="col-sm-3 control-label">Gaji Pokok</label>
           <div class="col-sm-1">
             Rp.
@@ -174,6 +173,8 @@
             <input type="text" class="form-control number-format" name="tunjanganparkir">
           </div>
         </div>
+       	</div><!-- /.pendapatan -->
+         
         <div class="form-group">
           <label class="col-sm-3 control-label">Status</label>
 
@@ -250,7 +251,7 @@
             <input type="text" class="form-control" name="jabatan">
           </div>
         </div>
-       
+       	<div class="uangtunjangan">
          <div class="form-group">
           <label for="gapok" class="col-sm-3 control-label">Gaji Pokok</label>
           <div class="col-sm-1">
@@ -288,6 +289,8 @@
             <input type="text" class="form-control number-format" name="tunjanganparkir">
           </div>
         </div>
+       		
+       	</div><!-- /.uangtunjangan -->
         <div class="form-group">
           <label class="col-sm-3 control-label">Status</label>
 
@@ -519,6 +522,9 @@ $('.table-user,.table-admin').on('click','.btn-edit',function(){
 			$('.modal-form-edit input[name=tunjangankomunikasi]').val(data.tunjangan_komunikasi);
 			$('.modal-form-edit select[name=status]').val(data.status);
 			$('.modal-form-edit input[name=saldocuti]').val(data.saldo_cuti);
+			if ($('.modal-form-edit select[name=role]').val()=='administrator') {
+				$('.uangtunjangan input,input[name=saldocuti]').prop('readonly',true).val(0);
+			}
 		  $('.modal-form-edit').modal('show');
 					
 		}
@@ -633,6 +639,11 @@ $('.btn-jamcuti').on('click',function(){
 		}
 	})
 })	
-	
+$('select[name=role]').change(function(){
+	$('.uangtunjangan input,input[name=saldocuti]').prop('readonly',false).val(' ');
+	if ($(this).val()=='administrator') {
+		$('.uangtunjangan input,input[name=saldocuti]').prop('readonly',true).val(0);
+	}
+})	
 </script>
 

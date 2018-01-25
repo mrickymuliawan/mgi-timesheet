@@ -20,7 +20,7 @@ class timesheet_m extends CI_Model {
 	{
 		$idtimesheet = $id ;
 		$query=$this->db->query
-		("select ts.id_perusahaan, ts.id_job,job_number, id_timesheet, pr.nama_perusahaan, alamat, kota, ope
+		("select ts.id_perusahaan, ts.id_job,job_number, tanggal_mulai,id_timesheet, pr.nama_perusahaan
 			from tbl_perusahaan pr 
 		inner join tbl_timesheet ts
 		on pr.id_perusahaan=ts.id_perusahaan join tbl_job jb on jb.id_job=ts.id_job
@@ -34,11 +34,10 @@ class timesheet_m extends CI_Model {
 
 		// edit total ope
 		$this->db->query
-		("update tbl_timesheet t1,
-			(select ope from tbl_timesheet t11 inner join tbl_perusahaan t22
-			on t11.id_perusahaan=t22.id_perusahaan where id_timesheet=$id) t2,
-			(select count(jam_kerja) totjaker from tbl_timesheetdetail where id_timesheet=$id and tipe_kerja='client') t3 
-			set t1.total_ope=(t3.totjaker*t2.ope) where id_timesheet=$id
+		("update tbl_timesheet main,
+			(select sum(psd.ope)totope from tbl_timesheetdetail tsd join tbl_perusahaandetail psd
+		on tsd.id_perusahaandetail=psd.id_perusahaandetail where id_timesheet='$id' and tipe_kerja='client') sub1
+			set main.total_ope=sub1.totope where id_timesheet='$id'
 			");
 		echo "Data updated";
 	}
@@ -64,22 +63,23 @@ class timesheet_m extends CI_Model {
 		// return $result->row_array();
 		$result=array();
 		$query=$this->db->query("select * from tbl_perusahaandetail where id_perusahaan=
-(select id_perusahaan from tbl_timesheet where id_timesheet='$id')");
+		(select id_perusahaan from tbl_timesheet where id_timesheet='$id')");
 		$kota=$query->result_array();
-		$res='';
-		$i=1;
+		$where= array('id_timesheet' => $id, 'tanggal' => $tgl);
+		$result=$this->db->get_where('tbl_timesheetdetail',$where)->row_array();
+		$result2='';
+		// $i=1;
 		foreach ($kota as $key => $value) {
-			if ($i==1) {
-				
-				$res.="<option value='$value[id_perusahaandetail]' selected>$value[kota] - OPE: $value[ope]</option>";
+			$ope=number_format($value['ope'],0,',','.');
+			if ($value['id_perusahaandetail'] == $result['id_perusahaandetail']) {
+				$result2.="<option value='$value[id_perusahaandetail]' selected>$value[kota] - OPE: $ope</option>";
 			}
 			else{
-				$res.="<option value='$value[id_perusahaandetail]'>$value[kota] - OPE: $value[ope]</option>";
+				$result2.="<option value='$value[id_perusahaandetail]'>$value[kota] - OPE: $ope</option>";
 
 			}
-			$i++;
 		}
-		$result['kota']=$res;
+		$result['kota']=$result2;
 		$query=$this->db->query("select * from tbl_timesheetdetail where id_timesheet='$id' and tanggal='$tgl'");
 		$result['detail']=$query->row_array();
 		return $result;
@@ -293,7 +293,7 @@ class timesheet_m extends CI_Model {
 		$this->db->query
 		("update tbl_timesheet main,
 		(select sum(psd.ope)totope from tbl_timesheetdetail tsd join tbl_perusahaandetail psd
-		on tsd.id_perusahaandetail=psd.id_perusahaandetail where id_timesheet='$id') sub1
+		on tsd.id_perusahaandetail=psd.id_perusahaandetail where id_timesheet='$id' and tipe_kerja='client') sub1
 			set main.total_ope=sub1.totope where id_timesheet='$id'
 			");
 		// update total lembur / cuti jika minus

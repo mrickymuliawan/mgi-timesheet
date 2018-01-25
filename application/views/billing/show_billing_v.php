@@ -14,9 +14,10 @@
 	<div class="box-header with-border">	
 		<div class="row">
 			<form class="form-date">
-			<label class="control-label col-sm-1">Bulan: </label>
+			<label class="control-label col-sm-1">Periode: </label>
 			<div class="col-md-2">
 				<select class="form-control" name="bulan">
+					<option value="alltime">All Time</option>
 					<option value="1">Januari</option>
 					<option value="2">Februari</option>
 					<option value="3">Maret</option>
@@ -32,15 +33,14 @@
 				</select>
 			</div>
 
-			<label class="control-label col-sm-1">Tahun: </label>
 			<div class="col-md-2">
-				<input type="number" name="tahun" class="form-control">
+				<input type="number" name="tahun" class="form-control" readonly="true">
 			</div>
 			<div class="col-md-2">
 				<button type="submit" class="form-control btn btn-outline-info btn-go">Go</button>
 			</div>
 			</form>
-			<div class="col-md-offset-2 col-md-2">
+			<div class="col-md-offset-3 col-md-2">
 				<div class="pull-right">
 					<button class="btn btn-outline-success btn-refresh"><i class="fa fa-refresh"></i><br>Refresh</button>
 				</div>
@@ -264,10 +264,15 @@ function loadtable(){
 
 // SET DATE
 var date=new Date();
-var bulan=date.getMonth()+1;
 var tahun=date.getFullYear();
-$('.form-date select[name=bulan]').val(bulan);
 $('.form-date input[name=tahun]').val(tahun);
+
+$('.form-date select[name=bulan]').change(function(){
+	$('.form-date input[name=tahun]').prop('readonly',true);
+	if ($(this).val()!='alltime') {
+		$('.form-date input[name=tahun]').prop('readonly',false);
+	}
+})
 
 // HAPUS EVENT AGAR TIDAK REPEAT
 offevent('.modal')

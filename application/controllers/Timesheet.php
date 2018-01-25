@@ -1058,9 +1058,11 @@ class timesheet extends CI_Controller {
 			$tahun=$this->input->get('tahun');
 			$periode=$this->input->get_post('periode');
 			$table=$this->db->
-			query("select tanggal,nama_perusahaan,kota,td.transport_lembur,td.uang_makan,ope,pic,status from tbl_timesheet ts 
+			query("select tanggal,nama_perusahaan,kota,td.transport_lembur,td.uang_makan,ope,pic,status 
+						from tbl_timesheetdetail td 
+						join tbl_timesheet ts  on td.id_timesheet=ts.id_timesheet
 						join tbl_perusahaan pr on ts.id_perusahaan=pr.id_perusahaan 
-						join tbl_timesheetdetail td  on ts.id_timesheet=td.id_timesheet
+						join tbl_perusahaandetail prd on td.id_perusahaandetail=prd.id_perusahaandetail
 						where 
 						npwp='$npwp' && bulan='$bulan' && tahun='$tahun' && periode='$periode'
 						&& ((tipe_kerja='client') or (transport_lembur > 0 or uang_makan > 0)) 

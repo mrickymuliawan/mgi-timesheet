@@ -136,11 +136,6 @@
           
           <li class="active">
             <a class='sidebar-link' href="<?php echo base_url('home') ?>">
-            <input type='hidden' value='<?php echo base_url('job') ?>'>
-            <i class="fa fa-briefcase text-light-blue"></i> <span>Job</span></a>
-          </li>
-          <li>
-            <a class='sidebar-link' href="<?php echo base_url('home') ?>">
             <input type='hidden' value='<?php echo base_url('perusahaan') ?>'>
             <i class="fa fa-building-o text-light-blue"></i> <span>Perusahaan</span></a>
           </li>
@@ -165,6 +160,11 @@
             <a class='sidebar-link' href="<?php echo base_url('home') ?>">
             <input type='hidden' value='<?php echo base_url('penggajian') ?>'>
             <i class="fa fa-usd text-light-blue" aria-hidden=true></i> <span>Penggajian</span></a>
+          </li>
+          <li>
+            <a class='sidebar-link' href="<?php echo base_url('home') ?>">
+            <input type='hidden' value='<?php echo base_url('job') ?>'>
+            <i class="fa fa-briefcase text-light-blue"></i> <span>Job</span></a>
           </li>
           <li>
             <a class='sidebar-link' href="<?php echo base_url('home') ?>">

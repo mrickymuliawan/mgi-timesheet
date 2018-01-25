@@ -208,29 +208,11 @@
           </div>
       	</div>
 
-      	<div class="form-group">
-          <label for="ope" class="col-sm-3 control-label">OPE</label>
-          <div class="col-sm-1">
-            Rp.
-          </div>
-          <div class="col-sm-8">
-            <input type="text" class="form-control number-format" name="ope" readonly="">
-          </div>
-      	</div>
-
-      	<div class="form-group">
-          <label for="kota" class="col-sm-3 control-label">Alamat</label>
+				<div class="form-group">
+          <label for="tanggalmulai" class="col-sm-3 control-label">Tanggal Mulai</label>
 
           <div class="col-sm-9">
-            <textarea class="form-control" name="alamat" readonly=""></textarea> 
-          </div>
-      	</div>
-
-      	<div class="form-group">
-          <label for="kota" class="col-sm-3 control-label">Kota</label>
-
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="kota" readonly="">
+             <input type="text" class="form-control" name="tanggalmulai" readonly="">
           </div>
       	</div>
 
@@ -263,13 +245,13 @@
 	  	<form class="form-horizontal form-editperusahaan">
 	    <div class="modal-body">
 
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label for="searchperusahaan" class="col-sm-3 control-label">Search</label>
 
           <div class="col-sm-9">
              <input type="text" class="form-control" name="searchperusahaan">
           </div>
-      	</div>
+      	</div> -->
 
 				<div class="form-group">
           <label for="jobnumber" class="col-sm-3 control-label">Job Number</label>
@@ -288,28 +270,10 @@
       	</div>
 
       	<div class="form-group">
-          <label for="ope" class="col-sm-3 control-label">OPE</label>
-          <div class="col-sm-1">
-            Rp.
-          </div>
-          <div class="col-sm-8">
-            <input type="text" class="form-control number-format" name="ope" readonly="">
-          </div>
-      	</div>
-
-      	<div class="form-group">
-          <label for="kota" class="col-sm-3 control-label">Alamat</label>
+          <label for="tanggalmulai" class="col-sm-3 control-label">Tanggal Mulai</label>
 
           <div class="col-sm-9">
-            <textarea class="form-control" name="alamat" readonly=""></textarea> 
-          </div>
-      	</div>
-
-      	<div class="form-group">
-          <label for="kota" class="col-sm-3 control-label">Kota</label>
-
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="kota" readonly="">
+            <input type="text" class="form-control" name="tanggalmulai" readonly="">
           </div>
       	</div>
 
@@ -322,7 +286,7 @@
       	</div>
       </div>
 			<div class="modal-footer">
-      	<button type="submit" name='submit' class="btn btn-outline-info">Save</button>
+      	<!-- <button type="submit" name='submit' class="btn btn-outline-info">Save</button> -->
       	<button type="button" name='delete' class="btn btn-outline-danger">Delete</button>
         <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
 		  </div>
@@ -348,6 +312,18 @@
 	        	</div>
 	        	
 	        	<div class="form-group">
+	        		<label class="control-label col-sm-4">Periode</label>
+	        		<div class="col-sm-3">
+	        			<input type="text" name="periode" class="form-control" value="1" readonly="">
+	        		</div>
+	        		<label class="control-label col-sm-2">Tanggal</label>
+	        		<div class="col-sm-3">
+	        			<input type="number" name="tanggal" class="form-control" readonly="">
+	        			<input type="hidden" name="idtimesheet" class="form-control">
+	        			<input type="hidden" name="jenishari" class="form-control">
+	        		</div>
+	        	</div>
+	        	<div class="form-group">
 	        		<label class="control-label col-sm-4">Jam Kerja</label>
 	        		<div class="col-sm-8">
 	        			<input type="number" min=1 name="jamkerja" class="form-control">
@@ -359,24 +335,6 @@
 	        			<select name="idperusahaandetail" class="form-control">
 	        				
 	        			</select>
-	        		</div>
-	        	</div>
-	        	<div class="form-group">
-	        		<label class="control-label col-sm-4">OPE</label>
-	        		<div class="col-sm-8">
-	        			<input type="text" name="ope" class="form-control" readonly="">
-	        		</div>
-	        	</div>
-	        	<div class="form-group">
-	        		<label class="control-label col-sm-4">Periode</label>
-	        		<div class="col-sm-3">
-	        			<input type="text" name="periode" class="form-control" value="1" readonly="">
-	        		</div>
-	        		<label class="control-label col-sm-2">Tanggal</label>
-	        		<div class="col-sm-3">
-	        			<input type="number" name="tanggal" class="form-control" readonly="">
-	        			<input type="hidden" name="idtimesheet" class="form-control">
-	        			<input type="hidden" name="jenishari" class="form-control">
 	        		</div>
 	        	</div>
 	        	<div class="form-group">
@@ -550,9 +508,7 @@ function autocomplete(modal){
 				$(modal+' input[name=idperusahaan]').val(data.id_perusahaan);
 				$(modal+' input[name=idjob]').val(data.id_job);
 				$(modal+' input[name=namaperusahaan]').val(data.nama_perusahaan)
-				$(modal+' input[name=ope]').val(data.ope);
-				$(modal+' textarea[name=alamat]').val(data.alamat);
-				$(modal+' input[name=kota]').val(data.kota);		
+				$(modal+' input[name=tanggalmulai]').val(data.tanggal_mulai);
 			}
 		})
 	}
@@ -798,10 +754,10 @@ $('.table-timesheet tbody').on('click','.td-idtimesheet',function(){
 			$('.modal-editperusahaan input[name=jobnumber]').val(data.job_number);
 			$('.modal-editperusahaan input[name=idperusahaan]').val(data.id_perusahaan)
 			$('.modal-editperusahaan input[name=namaperusahaan]').val(data.nama_perusahaan)
-			$('.modal-editperusahaan input[name=ope]').val(data.ope);
-			$('.modal-editperusahaan textarea[name=alamat]').val(data.alamat);
-			$('.modal-editperusahaan input[name=kota]').val(data.kota);	
-			$('.modal-editperusahaan input[name=idjob]').val(data.id_job);		
+			$('.modal-editperusahaan input[name=tanggalmulai]').val(data.tanggal_mulai);
+			// $('.modal-editperusahaan textarea[name=alamat]').val(data.alamat);
+			// $('.modal-editperusahaan input[name=kota]').val(data.kota);	
+			// $('.modal-editperusahaan input[name=idjob]').val(data.id_job);		
 		  $('.modal-editperusahaan').modal('show');
 					
 		}

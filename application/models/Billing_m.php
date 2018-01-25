@@ -8,15 +8,19 @@ class billing_m extends CI_Model {
 		parent::__construct();
 	}
 	public function getdikerjakan($bulan,$tahun){
-		$query=$this->db->query
-		("select id_job,nama_perusahaan,job_number from tbl_job jb
-			where month(tanggal_mulai)='$bulan' && year(tanggal_mulai)='$tahun' && status='dikerjakan'");
+		if ($bulan=='alltime') {
+			$query=$this->db->get_where('tbl_job',array('status' => 'dikerjakan'));
+			return $query->result_array();
+		}
+		$query=$this->db->get_where('tbl_job',array('status' => 'dikerjakan','month(tanggal_mulai)'=>$bulan,'year(tanggal_mulai)'=>$tahun));
 		return $query->result_array();
 	}
 	public function getselesai($bulan,$tahun){
-		$query=$this->db->query
-		("select id_job,nama_perusahaan,job_number from tbl_job jb
-			where month(tanggal_mulai)='$bulan' && year(tanggal_mulai)='$tahun' && status='selesai'");
+		if ($bulan=='alltime') {
+			$query=$this->db->get_where('tbl_job',array('status' => 'selesai'));
+			return $query->result_array();
+		}
+		$query=$this->db->get_where('tbl_job',array('status' => 'selesai','month(tanggal_mulai)'=>$bulan,'year(tanggal_mulai)'=>$tahun));
 		return $query->result_array();
 	}
 	 function gettotal($id){

@@ -8,10 +8,18 @@ class job_m extends CI_Model {
 		parent::__construct();
 	}
 	public function getdikerjakan($bulan,$tahun){
+		if ($bulan=='alltime') {
+			$query=$this->db->get_where('tbl_job',array('status' => 'dikerjakan'));
+			return $query->result_array();
+		}
 		$query=$this->db->get_where('tbl_job',array('status' => 'dikerjakan','month(tanggal_mulai)'=>$bulan,'year(tanggal_mulai)'=>$tahun));
 		return $query->result_array();
 	}
 	public function getselesai($bulan,$tahun){
+		if ($bulan=='alltime') {
+			$query=$this->db->get_where('tbl_job',array('status' => 'selesai'));
+			return $query->result_array();
+		}
 		$query=$this->db->get_where('tbl_job',array('status' => 'selesai','month(tanggal_mulai)'=>$bulan,'year(tanggal_mulai)'=>$tahun));
 		return $query->result_array();
 	}

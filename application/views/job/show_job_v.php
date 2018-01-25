@@ -14,9 +14,10 @@
 	<div class="box-header with-border">	
 		<div class="row">
 			<form class="form-date">
-			<label class="control-label col-sm-1">Bulan: </label>
+			<label class="control-label col-sm-1">Periode: </label>
 			<div class="col-md-2">
 				<select class="form-control" name="bulan">
+					<option value="alltime" selected="true">All Time</option>
 					<option value="1">Januari</option>
 					<option value="2">Februari</option>
 					<option value="3">Maret</option>
@@ -32,15 +33,15 @@
 				</select>
 			</div>
 
-			<label class="control-label col-sm-1">Tahun: </label>
+			
 			<div class="col-md-2">
-				<input type="number" name="tahun" class="form-control">
+				<input type="number" name="tahun" class="form-control" readonly="true">
 			</div>
 			<div class="col-md-2">
 				<button type="submit" class="form-control btn btn-outline-info btn-go">Go</button>
 			</div>
 			</form>
-			<div class="col-md-4">
+			<div class="col-md-4 col-md-offset-1 ">
 				<div class="pull-right">
 					<button class="btn btn-outline-info btn-add"><i class="fa fa-plus"></i><br>Add Job</button> 
 					<button class="btn btn-outline-success btn-refresh"><i class="fa fa-refresh"></i><br>Refresh</button>
@@ -175,28 +176,11 @@
           </div>
         </div>
 
-
         <div class="form-group">
-          <label class="col-sm-3 control-label">Alamat</label>
-
-          <div class="col-sm-9">
-            <textarea class="form-control" name="alamat" readonly=""></textarea>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-3 control-label">Kota</label>
+          <label class="col-sm-3 control-label">Jumlah Kota</label>
 
           <div class="col-sm-9">
-            <input type="text" class="form-control" name="kota" readonly="">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-3 control-label">OPE</label>
-          <div class="col-sm-1">
-            Rp.
-          </div>
-          <div class="col-sm-8">
-            <input type="text" class="form-control number-format" name="ope" readonly="">
+            <input type="text" class="form-control" name="jumlahkota" readonly="">
           </div>
         </div>
         <div class="form-group">
@@ -287,26 +271,10 @@
 
 
         <div class="form-group">
-          <label class="col-sm-3 control-label">Alamat</label>
+          <label class="col-sm-3 control-label">Jumlah Kota</label>
 
           <div class="col-sm-9">
-            <textarea class="form-control" name="alamat" readonly=""></textarea>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-3 control-label">Kota</label>
-
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="kota" readonly="">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-3 control-label">OPE</label>
-          <div class="col-sm-1">
-            Rp.
-          </div>
-          <div class="col-sm-8">
-            <input type="text" class="form-control number-format" name="ope" readonly="">
+            <input type="text" class="form-control" name="jumlahkota" readonly="">
           </div>
         </div>
         <div class="form-group">
@@ -405,9 +373,7 @@ function autocomplete(modal){
 				$(modal+' input[name=searchperusahaan]').val("");
 				$(modal+' input[name=idperusahaan]').val(data.id_perusahaan);
 				$(modal+' input[name=namaperusahaan]').val(data.nama_perusahaan)
-				$(modal+' input[name=ope]').val(data.ope);
-				$(modal+' textarea[name=alamat]').val(data.alamat);
-				$(modal+' input[name=kota]').val(data.kota);
+				$(modal+' input[name=jumlahkota]').val(data.jumlah_kota);
 				$(modal+' input[name=fee]').val(data.fee);		
 			}
 		})
@@ -419,10 +385,16 @@ function autocomplete(modal){
 
 // SET DATE
 var date=new Date();
-var bulan=date.getMonth()+1;
 var tahun=date.getFullYear();
-$('.form-date select[name=bulan]').val(bulan);
 $('.form-date input[name=tahun]').val(tahun);
+
+$('.form-date select[name=bulan]').change(function(){
+	$('.form-date input[name=tahun]').prop('readonly',true);
+	if ($(this).val()!='alltime') {
+		$('.form-date input[name=tahun]').prop('readonly',false);
+	}
+})
+
 
 // HAPUS EVENT AGAR TIDAK REPEAT
 offevent('.modal')
@@ -452,8 +424,17 @@ $('.btn-add').on('click',function(){
  $('.form-add').validate({
 	rules:{
 		jobnumber:{
-			required:true
-		},
+      required:true,
+      remote:{
+        url: "<?php echo base_url('Job/checkjobnumber'); ?>",
+        type: "post",
+        data: {
+          koderegister: function() {
+            return $( ".form-add input[name=jobnumber]" ).val();
+          }
+        }
+      }
+    },
 		tanggalmulai:{
 			required:true
 		},
@@ -461,6 +442,11 @@ $('.btn-add').on('click',function(){
 			required:true
 		}
 	},
+	messages:{
+    jobnumber:{
+      remote:'Job Number has been registered'
+    }
+  }, 
 	submitHandler:function(form){
 		$.ajax({
 		  url:"<?php echo base_url('job/add') ?>", 
@@ -488,9 +474,7 @@ $('.table-dikerjakan,.table-selesai').on('click','.btn-edit',function(){
 			$('.modal-edit-job input[name=jobnumber]').val(data.job_number);
 			$('.modal-edit-job input[name=tanggalmulai]').val(data.tanggal_mulai);
 			$('.modal-edit-job input[name=namaperusahaan]').val(data.nama_perusahaan);
-			$('.modal-edit-job textarea[name=alamat]').val(data.alamat);
-			$('.modal-edit-job input[name=kota]').val(data.kota);
-			$('.modal-edit-job input[name=ope]').val(data.ope);
+			$('.modal-edit-job input[name=kota]').val(data.jumlah_kota);
 			$('.modal-edit-job input[name=fee]').val(data.fee);
 			$('.modal-edit-job select[name=status]').val(data.status);
 		  $('.modal-edit-job').modal('show');

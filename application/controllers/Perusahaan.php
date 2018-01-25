@@ -64,8 +64,8 @@ class Perusahaan extends CI_Controller {
 							'id_perusahaan' => $lastrow['id_perusahaan'],
  							'alamat' => $this->input->get_post("alamat$i"),
 							'kota' => $this->input->get_post("kota$i"),
-							'ope' => $this->input->get_post("ope$i"),
-							'no_kota' => $i);
+							'ope' => $this->input->get_post("ope$i")
+							);
 			$this->perusahaan_m->insert_detail($data);
 		}
 	}
@@ -98,8 +98,8 @@ class Perusahaan extends CI_Controller {
 							'id_perusahaan' => $id,
  							'alamat' => $this->input->get_post("alamat$i"),
 							'kota' => $this->input->get_post("kota$i"),
-							'ope' => $this->input->get_post("ope$i"),
-							'no_kota' => $i);
+							'ope' => $this->input->get_post("ope$i")
+							);
 			$this->perusahaan_m->edit_detail($id,$data);
 		}
 	}

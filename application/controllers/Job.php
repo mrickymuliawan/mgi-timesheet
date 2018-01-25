@@ -151,5 +151,15 @@ class Job extends CI_Controller {
 		$id=$this->input->get_post('id');
 		$this->job_m->delete($id);
 	}
-	
+	public function checkjobnumber(){
+		$jobnumber=$this->input->get_post('jobnumber');
+		$result=$this->db->get_where('tbl_job',array('job_number' => $jobnumber ));
+		if($result->num_rows() == 0){
+			echo 'true';
+
+		}
+		else{
+			echo 'false';
+		}
+	}
 }

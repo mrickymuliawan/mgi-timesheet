@@ -25,7 +25,6 @@ class User extends CI_Controller {
 			$r[]=$value['nama_user'];
 			$r[]=$value['jabatan'];
 			$r[]="<span class='number-format2'>Rp. $value[gaji_pokok]</span>";
-			$r[]="<span class='number-format2'>Rp. $value[tunjangan_transport]</span>";
 			$r[]=$value['role'];
 			$r[]=$value['status'];
 
