@@ -58,7 +58,6 @@
 					<thead>
 						<th>No</th>
 						<th>Nama</th>
-						<th>Total Tunjangan Transport Lembur</th>
 						<th>Tunjangan Transport</th>
 						<th>Total Uang Lembur</th>
 						<th>Total Uang Ope</th>
@@ -312,9 +311,7 @@
 			<div class="modal-footer">
 				
 				<a class="btn btn-outline-primary btn-print" target="_blank">Print <i class="fa fa-print"></i></a>
-				<a class='btn btn-outline-success btn-login' href=''>
-					Login   <i class='fa fa-sign-in'></i> 
-				</a>  
+
 				
 			  <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
 			        

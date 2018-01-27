@@ -148,8 +148,8 @@ class User extends CI_Controller {
 		$role=$this->input->get_post('role');
 		$status=$this->input->get_post('status');
 		$saldocuti=$this->input->get_post('saldocuti');
-		$uanglembur1=round(($gajipokok/173)*1.5);
-		$uanglembur2=round(($gajipokok/173)*2);
+		$uanglembur1=round(($gajipokok/173)*1.5,-2);
+		$uanglembur2=round(($gajipokok/173)*2,-2);
 		$data = array('npwp' => $npwp,
 									'nama_user' => $namauser,
 									'jabatan' => $jabatan,

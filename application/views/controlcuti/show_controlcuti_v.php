@@ -42,7 +42,7 @@
 			</form>
 			<div class="col-md-4"> 
 				<div class="pull-right">
-					<button class="btn btn-outline-warning btn-jamcuti"><i class="fa fa-plus"></i><br>Add Cuti </button> 
+					<!-- <button class="btn btn-outline-warning btn-jamcuti"><i class="fa fa-plus"></i><br>Add Cuti </button>  -->
 					<button class="btn btn-outline-success btn-refresh"><i class="fa fa-refresh"></i><br>Refresh</button>
 				</div>
 			</div>

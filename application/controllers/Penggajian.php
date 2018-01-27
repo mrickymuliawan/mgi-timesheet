@@ -24,7 +24,6 @@ class Penggajian extends CI_Controller {
 			$tbody=array();
 			$tbody[]=$key+1;
 			$tbody[]=$value['nama_user'];
-			$tbody[]="<span class='number-format2'>Rp. $value[total_transportlembur]</span>";
 			$tbody[]="<span class='number-format2'>Rp. $value[total_tunjangantransport]</span>";
 			$tbody[]="<span class='number-format2'>Rp. $value[total_uanglembur]</span>";
 			$tbody[]="<span class='number-format2'>Rp. $totalope</span>";
@@ -436,7 +435,7 @@ class Penggajian extends CI_Controller {
 					where 
 					npwp='$npwp' && bulan='$bulan' && tahun='$tahun' && periode='$periode'
 					&& ((tipe_kerja='client') or (transport_lembur > 0 or uang_makan > 0)) 
-					 ")->result_array();
+					order by abs(tanggal) ")->result_array();
 		$total=$this->db->
 		query("select sum(total_transport_lembur) tlembur, sum(total_uang_makan) tumakan, sum(total_ope) tope 
 					from tbl_timesheet
@@ -960,7 +959,7 @@ class Penggajian extends CI_Controller {
 						where 
 						npwp='$npwp' && bulan='$bulan' && tahun='$tahun' && periode='$periode'
 						&& ((tipe_kerja='client') or (transport_lembur > 0 or uang_makan > 0)) 
-						 ")->result_array();
+						order by abs(tanggal) ")->result_array();
 			$detail=$this->db->
 			query("select sum(total_transport_lembur) tlembur, sum(total_uang_makan) tumakan,
 			 			sum(total_ope) tope 

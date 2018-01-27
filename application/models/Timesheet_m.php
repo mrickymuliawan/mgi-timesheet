@@ -307,28 +307,39 @@ class timesheet_m extends CI_Model {
 
 		// update total uang lembur
 		$result=$this->db->query // ambil jam lembur hari biasa
-		("select count(distinct tanggal)jam1,sum(lembur)lembur from tbl_timesheetdetail td
+		("select count(distinct tanggal)jam1,sum(lembur)lembur,sum(lembur)-count(distinct tanggal)jam2
+		 from tbl_timesheetdetail td
 		inner join tbl_timesheet ts
 		on td.id_timesheet=ts.id_timesheet
-		where bulan='$bulan' && tahun='$tahun' && npwp='$npwp' && jenis_hari='biasa' && lembur>0 && periode='$periode'
+		where bulan='$bulan' && tahun='$tahun' && npwp='$npwp' && jenis_hari='biasa' && lembur>0 
 		")->row_array();
 		$result2=$this->db->query // ambil jam lembur hari libur
 		("select sum(jam_kerja)jamkerja from tbl_timesheetdetail td
 		inner join tbl_timesheet ts
 		on td.id_timesheet=ts.id_timesheet
-		where bulan='$bulan' && tahun='$tahun' && npwp='$npwp' && jenis_hari='libur' && periode='$periode'
+		where bulan='$bulan' && tahun='$tahun' && npwp='$npwp' && jenis_hari='libur' 
 		")->row_array();
 		$result3=$this->db->query
 		("select sum(total_lembur)lembur from tbl_timesheet 
-		where bulan='$bulan' && tahun='$tahun' && npwp='$npwp' && periode='$periode'")->row_array();
+		where bulan='$bulan' && tahun='$tahun' && npwp='$npwp' ")->row_array();
 
+		$result4=$this->db->query 
+		("select count(distinct tanggal)jam1,sum(lembur)lembur,sum(lembur)+count(distinct tanggal)jam2
+		 from tbl_timesheetdetail td
+		inner join tbl_timesheet ts
+		on td.id_timesheet=ts.id_timesheet
+		where bulan='$bulan' && tahun='$tahun' && npwp='$npwp' && jenis_hari='biasa' && lembur<0 
+		")->row_array();
+		$this->db->query("update tbl_timesheet set total_uanglembur=0 where bulan='$bulan' && tahun='$tahun' && npwp='$npwp' ");
+		
 		$uanglembur=$this->db->query
 			("select uang_lembur1,uang_lembur2 from tbl_user where npwp='$npwp'")->row_array();
 			$jamkesatu=$result['jam1']*$uanglembur['uang_lembur1'];
-			$jamkedua=($result3['lembur']-$result['jam1'])*$uanglembur['uang_lembur2'];
+			$jamkedua=$result['jam2']*$uanglembur['uang_lembur2'];
 			$jamlibur=$result2['jamkerja']*$uanglembur['uang_lembur1'];
-			$total=$jamkedua+$jamkesatu+$jamlibur;
-		
+			$minus=($result4['jam1']*$uanglembur['uang_lembur1'])-($result4['jam2']*$uanglembur['uang_lembur2']);
+			$total=($jamkedua+$jamkesatu+$jamlibur)-$minus;
+		// die("$minus");
 		if ($result3['lembur']<=0) {
 			("update tbl_timesheet set total_uanglembur=0 where id_timesheet='$id' ");
 		}

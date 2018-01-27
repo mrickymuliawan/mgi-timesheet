@@ -261,7 +261,19 @@
             <input type="text" class="form-control number-format" name="gajipokok">
           </div>
         </div>
-        
+        <div class="form-group">
+          <label for="gapok" class="col-sm-3 control-label">Uang Lembur 1</label>
+
+          <div class="col-sm-3">
+            <input type="text" class="form-control number-format" name="uanglembur1" readonly="">
+          </div>
+          <label for="gapok" class="col-sm-3 control-label">Uang Lembur 2</label>
+ 
+          <div class="col-sm-3">
+            <input type="text" class="form-control number-format" name="uanglembur2" readonly="">
+          </div>
+        </div>
+
         <div class="form-group">
           <label for="lembur" class="col-sm-3 control-label">Tunjangan Transport</label>
           <div class="col-sm-1">
@@ -522,6 +534,8 @@ $('.table-user,.table-admin').on('click','.btn-edit',function(){
 			$('.modal-form-edit input[name=tunjangankomunikasi]').val(data.tunjangan_komunikasi);
 			$('.modal-form-edit select[name=status]').val(data.status);
 			$('.modal-form-edit input[name=saldocuti]').val(data.saldo_cuti);
+      $('.modal-form-edit input[name=uanglembur1]').val(data.uang_lembur1);
+      $('.modal-form-edit input[name=uanglembur2]').val(data.uang_lembur2);
 			if ($('.modal-form-edit select[name=role]').val()=='administrator') {
 				$('.uangtunjangan input,input[name=saldocuti]').prop('readonly',true).val(0);
 			}
