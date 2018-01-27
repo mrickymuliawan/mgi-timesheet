@@ -16,7 +16,7 @@
 			<form class="form-date">
 			<label class="control-label col-sm-1 dblclick">Bulan: </label>
 			<div class="col-md-2">
-				<select class="form-control" name="bulan">
+				<select class="form-control" name="bulan2" disabled="">
 					<option value="1">Januari</option>
 					<option value="2">Februari</option>
 					<option value="3">Maret</option>
@@ -30,12 +30,12 @@
 					<option value="11">November</option>
 					<option value="12">Desember</option>
 				</select>
-				<!-- <input type="hidden" name="bulan" /> -->
+				<input type="hidden" name="bulan" />
 			</div>
 
 			<label class="control-label col-sm-1">Tahun: </label>
 			<div class="col-md-2">
-				<input type="number" name="tahun" class="form-control">
+				<input type="number" name="tahun" class="form-control" readonly="">
 			</div>
 			<div class="col-md-2">
 				<button type="submit" class="form-control btn btn-outline-info btn-go">Go</button>
@@ -937,7 +937,7 @@ $('.table-timesheet thead').on('click','.td-hari,.td-libur-custom',function(){
 })	
 
 
-	// $('.btn-go').hide()
+	$('.btn-go').hide()
 	// $('.dblclick').dblclick(function(){
 	// 	$(".form-date select[name=bulan2]").removeAttr('disabled')
 	// 	$(".form-date input[name=tahun]").removeAttr('readonly')

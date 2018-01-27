@@ -447,6 +447,7 @@ $('.btn-refresh').on('click',function(){
 
 // ADD ITEM
 $('.btn-add').on('click',function(){
+  $('.uangtunjangan input,input[name=saldocuti]').prop('readonly',false).val(' ');
 	$('.form-add').trigger('reset')
 	$('.modal-form-add').modal('show')
 	$('.modal-form-add input[name=npwp]').change(function(){
@@ -518,6 +519,7 @@ $('.form-add').validate({
  
 // EDIT ITEM
 $('.table-user,.table-admin').on('click','.btn-edit',function(){
+  $('.uangtunjangan input,input[name=saldocuti]').prop('readonly',false).val(' ');
 	var npwp=$(this).val();
 	$.ajax({
 		url:"<?php echo base_url('user/getedit') ?>", 
