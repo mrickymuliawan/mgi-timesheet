@@ -22,7 +22,6 @@ class Job extends CI_Controller {
 			$r=array();
 			$r[]=$key+1;
 			$r[]=$value['job_number'];
-			$r[]=$value['id_perusahaan'];
 			$r[]=$value['nama_perusahaan'];
 			$r[]=$value['tanggal_mulai'];
 			// $r[]="<span class='number-format2'>Rp. $value[total_transport_lembur]</span>";
@@ -56,7 +55,6 @@ class Job extends CI_Controller {
 			$r=array();
 			$r[]=$key+1;
 			$r[]=$value['job_number'];
-			$r[]=$value['id_perusahaan'];
 			$r[]=$value['nama_perusahaan'];
 			$r[]=$value['tanggal_mulai'];
 			// $r[]="<span class='number-format2'>Rp. $value[total_transport_lembur]</span>";

@@ -24,11 +24,11 @@ class Penggajian extends CI_Controller {
 			$tbody=array();
 			$tbody[]=$key+1;
 			$tbody[]=$value['nama_user'];
-			$tbody[]="<span class='number-format2'>Rp. $value[total_tunjangantransport]</span>";
-			$tbody[]="<span class='number-format2'>Rp. $value[total_uanglembur]</span>";
-			$tbody[]="<span class='number-format2'>Rp. $totalope</span>";
-			$tbody[]="<span class='number-format2'>Rp. $value[gaji_pokok]</span>";
-			$tbody[]="<span class='number-format2 bg-success'>Rp. $value[total_gaji]</span>";
+			$tbody[]="Rp. ".number_format("$value[total_tunjangantransport]",0,',','.');
+			$tbody[]="Rp. ".number_format("$value[total_uanglembur]",0,',','.');
+			$tbody[]="Rp. ".number_format("$totalope",0,',','.');
+			$tbody[]="Rp. ".number_format("$value[gaji_pokok]",0,',','.');
+			$tbody[]="<span class='bg-success'>Rp. ".number_format("$value[total_gaji]",0,',','.')."</span>";
 
 			$tbody[]="<button class='btn btn-outline-primary btn-sm btn-details' value='$value[npwp]'
 								data-toggle='popover' data-placement='top' data-content='Detail'>

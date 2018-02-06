@@ -24,7 +24,7 @@ class User extends CI_Controller {
 			$r[]=$value['npwp'];
 			$r[]=$value['nama_user'];
 			$r[]=$value['jabatan'];
-			$r[]="<span class='number-format2'>Rp. $value[gaji_pokok]</span>";
+			$r[]="Rp. ".number_format("$value[gaji_pokok]",0,',','.');
 			$r[]=$value['role'];
 			$r[]=$value['status'];
 
@@ -95,9 +95,9 @@ class User extends CI_Controller {
 	// INSERT DATA
 	public function add()
 	{
-		$npwp=$this->input->get_post('npwp');
+		$npwp=strtolower($this->input->get_post('npwp'));
 		$namauser=$this->input->get_post('namauser');
-		$password=$this->input->get_post('password');
+		$password=strtolower($this->input->get_post('password'));
 		$password=hash('ripemd160', $password);
 
 		$jabatan=$this->input->get_post('jabatan');
@@ -172,7 +172,7 @@ class User extends CI_Controller {
 		$this->user_m->delete($npwp);
 	}
 	public function checknpwp(){
-		$npwp=$this->input->get_post('npwp');
+		$npwp=strtolower($this->input->get_post('npwp'));
 		$result=$this->db->get_where('tbl_user',array('npwp' => $npwp ));
 		if($result->num_rows() == 0){
 			echo 'true';
@@ -184,7 +184,7 @@ class User extends CI_Controller {
 	}
 	public function resetpass()
 	{
-		$npwp=$this->input->get_post('npwp');
+		$npwp=strtolower($this->input->get_post('npwp'));
 		$password=hash('ripemd160', $npwp);
 		$data = array('npwp' => $npwp,
 									'password' => $password);

@@ -66,7 +66,6 @@
 								<tr>
 									<th>No.</th>
 									<th>Job Number</th>
-									<th>ID Perusahaan</th>
 									<th>Nama Perusahaan</th>
 									<th>Tanggal Mulai</th>
 								<!-- 	<th>Total Transport Lembur</th>
@@ -87,7 +86,6 @@
 								<tr>
 									<th>No.</th>
 									<th>Job Number</th>
-									<th>ID Perusahaan</th>
 									<th>Nama Perusahaan</th>
 									<th>Tanggal Mulai</th>
 <!-- 									<th>Total Transport Lembur</th>

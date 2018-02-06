@@ -25,10 +25,10 @@ class Evaluasi extends CI_Controller {
 			$r=array();
 			$r[]=$key+1;
 			$r[]=$value['nama_perusahaan'];
-			$r[]="<span class='number-format2'>Rp. $value[fee]</span>";
-			$r[]="<span class='number-format2'>Rp. $value[tjaker]</span>";
-			$r[]="<span class='number-format2'>Rp. $value[tlembur]</span>";
-			$r[]="<span class='number-format2'>Rp. $value[tope]</span>";
+			$r[]="Rp. ".number_format("$value[fee]",0,',','.');
+			$r[]=number_format("$value[tjaker]",0,',','.');
+			$r[]=number_format("$value[tlembur]",0,',','.');
+			$r[]="Rp. ".number_format("$value[tope]",0,',','.');
 
 			$r[]="<button class='btn btn-outline-primary btn-sm btn-detail' value='$value[id_perusahaan]'
 						data-toggle='popover' data-placement='top' data-content='Detail'>

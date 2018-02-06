@@ -30,7 +30,7 @@
 						<tr>
 							<th>No.</th>
 							<th>Nama Perusahaan</th>
-							<th>Alamat</th>
+							<th>Fee</th>
 							
 							<th>Tools</th>
 						</tr>

@@ -265,12 +265,12 @@
           <label for="gapok" class="col-sm-3 control-label">Uang Lembur 1</label>
 
           <div class="col-sm-3">
-            <input type="text" class="form-control number-format" name="uanglembur1" readonly="">
+            <input type="text" class="form-control number-format" name="uanglembur1" disabled="true">
           </div>
           <label for="gapok" class="col-sm-3 control-label">Uang Lembur 2</label>
  
           <div class="col-sm-3">
-            <input type="text" class="form-control number-format" name="uanglembur2" readonly="">
+            <input type="text" class="form-control number-format" name="uanglembur2" disabled="true">
           </div>
         </div>
 

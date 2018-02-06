@@ -58,7 +58,7 @@ input[readonly],select[disabled],textarea[readonly]{
       width: 20%;
       z-index:9999; 
       border-radius:0px;
-      opacity: 0.5 
+     
   }
 
 /* NAVBAR */

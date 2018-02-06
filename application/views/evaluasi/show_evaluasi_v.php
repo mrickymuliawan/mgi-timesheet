@@ -74,8 +74,8 @@
 							<!-- <th>Job Number</th> -->
 							<th>Nama Perusahaan</th>
 							<th>Fee</th>
-							<th>Total Transport Lembur</th>
-							<th>Total Uang Makan</th>
+							<th>Total Jam Kerja</th>
+							<th>Total Jam Lembur</th>
 							<th>Total OPE</th>
 							<th>Tools</th>
 						</tr>

@@ -22,7 +22,7 @@ class Perusahaan extends CI_Controller {
 			$r=array();
 			$r[]=$key+1;
 			$r[]=$value['nama_perusahaan'];
-			$r[]="<span class='number-format2'>Rp. $value[fee]</span>";
+			$r[]="Rp. ".number_format("$value[fee]",0,',','.');
 
 			$r[]="<button class='btn btn-outline-info btn-sm btn-edit' value='$value[id_perusahaan]'
 						data-toggle='popover' data-placement='top' data-content='Edit'>

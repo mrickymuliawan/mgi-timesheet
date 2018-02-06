@@ -25,10 +25,10 @@ class Billing extends CI_Controller {
 			$r[]=$key+1;
 			$r[]=$value['job_number'];
 			$r[]=$value['nama_perusahaan'];
-			$r[]="<span class='number-format2'>Rp. $value2[fee]</span>";
-			$r[]="<span class='number-format2'>Rp. $value2[tottranslembur]</span>";
-			$r[]="<span class='number-format2'>Rp. $value2[totuangmakan]</span>";
-			$r[]="<span class='number-format2'>Rp. $value2[totope]</span>";
+			$r[]="Rp. ".number_format("$value2[fee]",0,',','.');
+			$r[]="Rp. ".number_format("$value2[tottranslembur]",0,',','.');
+			$r[]="Rp. ".number_format("$value2[totuangmakan]",0,',','.');
+			$r[]="Rp. ".number_format("$value2[totope]",0,',','.');
 
 			$r[]="<button class='btn btn-outline-primary btn-sm btn-detail' value='$value[id_job]'
 						data-toggle='popover' data-placement='top' data-content='Detail'>
@@ -61,14 +61,14 @@ class Billing extends CI_Controller {
 			$r[]=$key+1;
 			$r[]=$value['job_number'];
 			$r[]=$value['nama_perusahaan'];
-			$r[]="<span class='number-format2'>Rp. $value2[fee]</span>";
-			$r[]="<span class='number-format2'>Rp. $value2[tottranslembur]</span>";
-			$r[]="<span class='number-format2'>Rp. $value2[totuangmakan]</span>";
-			$r[]="<span class='number-format2'>Rp. $value2[totope]</span>";
+			$r[]="Rp. ".number_format("$value2[fee]",0,',','.');
+			$r[]="Rp. ".number_format("$value2[tottranslembur]",0,',','.');
+			$r[]="Rp. ".number_format("$value2[totuangmakan]",0,',','.');
+			$r[]="Rp. ".number_format("$value2[totope]",0,',','.');
 
-			$r[]="<button class='btn btn-outline-info btn-sm btn-detail' value='$value[id_job]'
+			$r[]="<button class='btn btn-outline-primary btn-sm btn-detail' value='$value[id_job]'
 						data-toggle='popover' data-placement='top' data-content='Detail'>
-							<i class='fa fa-edit'></i>
+							<i class='fa fa-search-plus'></i>
 						</button>  
 						";
 						// <button class='btn btn-outline-danger btn-sm btn-delete' value='$value[id_job]'>
