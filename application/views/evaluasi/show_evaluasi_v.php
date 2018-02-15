@@ -73,7 +73,6 @@
 							<th>No.</th>
 							<!-- <th>Job Number</th> -->
 							<th>Nama Perusahaan</th>
-							<th>Fee</th>
 							<th>Total Jam Kerja</th>
 							<th>Total Jam Lembur</th>
 							<th>Total OPE</th>

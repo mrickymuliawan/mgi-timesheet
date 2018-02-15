@@ -25,7 +25,7 @@ class Billing extends CI_Controller {
 			$r[]=$key+1;
 			$r[]=$value['job_number'];
 			$r[]=$value['nama_perusahaan'];
-			$r[]="Rp. ".number_format("$value2[fee]",0,',','.');
+			$r[]="Rp. ".number_format("$value[fee]",0,',','.');
 			$r[]="Rp. ".number_format("$value2[tottranslembur]",0,',','.');
 			$r[]="Rp. ".number_format("$value2[totuangmakan]",0,',','.');
 			$r[]="Rp. ".number_format("$value2[totope]",0,',','.');
@@ -61,7 +61,7 @@ class Billing extends CI_Controller {
 			$r[]=$key+1;
 			$r[]=$value['job_number'];
 			$r[]=$value['nama_perusahaan'];
-			$r[]="Rp. ".number_format("$value2[fee]",0,',','.');
+			$r[]="Rp. ".number_format("$value[fee]",0,',','.');
 			$r[]="Rp. ".number_format("$value2[tottranslembur]",0,',','.');
 			$r[]="Rp. ".number_format("$value2[totuangmakan]",0,',','.');
 			$r[]="Rp. ".number_format("$value2[totope]",0,',','.');
@@ -102,6 +102,10 @@ class Billing extends CI_Controller {
 		("select distinct nama_user, ts.npwp from tbl_timesheet ts
 			inner join tbl_user us on ts.npwp=us.npwp where id_job='$idjob'")->result_array();
 		$tbody='';
+		$tfoot=$this->db->
+		query("select sum(total_transport_lembur) tlembur, sum(total_uang_makan) tumakan, sum(total_ope) tope 
+					from tbl_timesheet
+					where id_job='$idjob'")->row_array();
 		$no=1;
 		foreach ($table as $key => $value) {
 			$total=$this->db->query
@@ -119,6 +123,12 @@ class Billing extends CI_Controller {
 						<tr>";
 			$no++;
 		}
+		$tbody.="<tr>";
+		$tbody.="<th colspan='3'>TOTAL</th>";
+		$tbody.="<th><span class='number-format2'>$tfoot[tope]</span></th>";
+		$tbody.="<th><span class='number-format2'>$tfoot[tlembur]</span></th>";
+		$tbody.="<th><span class='number-format2'>$tfoot[tumakan]</span></th>";
+		$tbody.="</tr>";
 		$data['tbody'][]=$tbody;
 		echo json_encode($data);
 	}

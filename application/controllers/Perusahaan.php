@@ -22,7 +22,6 @@ class Perusahaan extends CI_Controller {
 			$r=array();
 			$r[]=$key+1;
 			$r[]=$value['nama_perusahaan'];
-			$r[]="Rp. ".number_format("$value[fee]",0,',','.');
 
 			$r[]="<button class='btn btn-outline-info btn-sm btn-edit' value='$value[id_perusahaan]'
 						data-toggle='popover' data-placement='top' data-content='Edit'>
@@ -49,12 +48,10 @@ class Perusahaan extends CI_Controller {
 	public function add()
 	{
 		$namaperusahaan=$this->input->get_post('namaperusahaan');
-		$fee=$this->input->get_post('fee');
 		$jumlahkota=$this->input->get_post('jumlahkota');
 		$data = array(
 									'nama_perusahaan' => $namaperusahaan,
-									'jumlah_kota' => $jumlahkota,
-									'fee' => $fee);
+									'jumlah_kota' => $jumlahkota);
 		$this->perusahaan_m->insert($data);
 
 		//input to tbl_perusahaandetail
@@ -83,13 +80,11 @@ class Perusahaan extends CI_Controller {
 	{
 		$id=$this->input->get_post('idperusahaan');
 		$namaperusahaan=$this->input->get_post('namaperusahaan');
-		$fee=$this->input->get_post('fee');
 		$jumlahkota=$this->input->get_post('jumlahkota');
 		$data = array(
 									'id_perusahaan' => $id,
 									'nama_perusahaan' => $namaperusahaan,
-									'jumlah_kota' => $jumlahkota,
-									'fee' => $fee);
+									'jumlah_kota' => $jumlahkota);
 		$this->perusahaan_m->edit($id,$data);
 
 		// perusahaan detaul

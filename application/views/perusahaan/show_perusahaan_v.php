@@ -30,7 +30,6 @@
 						<tr>
 							<th>No.</th>
 							<th>Nama Perusahaan</th>
-							<th>Fee</th>
 							
 							<th>Tools</th>
 						</tr>
@@ -66,15 +65,7 @@
           </div>
         </div>
        
-        <div class="form-group">
-          <label for="" class="col-sm-3 control-label">Fee</label>
-          <div class="col-sm-1">
-            Rp.
-          </div>
-          <div class="col-sm-8">
-            <input type="text" class="form-control number-format" name="fee">
-          </div>
-        </div>
+        
 				
 				<div class="form-group">
           <label for="" class="col-sm-3 control-label">Jumlah Kota</label>
@@ -203,15 +194,7 @@
           </div>
         </div>
        
-        <div class="form-group">
-          <label for="" class="col-sm-3 control-label">Fee</label>
-          <div class="col-sm-1">
-            Rp.
-          </div>
-          <div class="col-sm-8">
-            <input type="text" class="form-control number-format" name="fee">
-          </div>
-        </div>
+        
         <div class="form-group">
           <label for="" class="col-sm-3 control-label">Jumlah Kota</label>
           <div class="col-sm-9">
@@ -375,9 +358,6 @@ $('.btn-add').on('click',function(){
 		},
 		ope1:{
 			required:true
-		},
-		fee:{
-			required:true
 		}
 	},
 	submitHandler:function(form){
@@ -405,7 +385,6 @@ $('.table-data').on('click','.btn-edit',function(){
 		success:function(data){
 			$('.modal-form-edit input[name=idperusahaan]').val(data[0]['id_perusahaan']);
 			$('.modal-form-edit input[name=namaperusahaan]').val(data[0]['nama_perusahaan']);
-			$('.modal-form-edit input[name=fee]').val(data[0]['fee']);
 			$('.modal-form-edit select[name=jumlahkota]').val(data[0]['jumlah_kota']);
 			for (var i = 0; i < data[0]['jumlah_kota']; i++) {
 				j=i+1;
@@ -431,9 +410,6 @@ $('.table-data').on('click','.btn-edit',function(){
 			required:true
 		},
 		ope1:{
-			required:true
-		},
-		fee:{
 			required:true
 		}
 	},

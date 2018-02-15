@@ -9,7 +9,7 @@ class evaluasi_m extends CI_Model {
 	}
 	public function getdata($bulanmulai,$bulanselesai,$tahun){
 		$query=$this->db->query
-		("select pr.id_perusahaan,nama_perusahaan, fee, sum(total_jamkerja)tjaker,sum(total_lembur)tlembur,sum(total_ope) tope from tbl_perusahaan pr join tbl_timesheet ts on pr.id_perusahaan = ts.id_perusahaan 
+		("select pr.id_perusahaan,nama_perusahaan, sum(total_jamkerja)tjaker,sum(total_lembur)tlembur,sum(total_ope) tope from tbl_perusahaan pr join tbl_timesheet ts on pr.id_perusahaan = ts.id_perusahaan 
 			where bulan>=$bulanmulai && bulan<=$bulanselesai && tahun =$tahun group by ts.id_perusahaan ");
 		return $query->result_array();
 	}
@@ -28,7 +28,7 @@ class evaluasi_m extends CI_Model {
 											'11' => 'November',
 											'12' => 'Desember');
 		$query=$this->db->query
-		("select concat('$bulantext[$bulanmulai] - $bulantext[$bulanselesai] $tahun')periode, pr.id_perusahaan, nama_perusahaan, fee, sum(total_jamkerja)tjaker,sum(total_lembur)tlembur, sum(total_ope) tope from tbl_perusahaan pr join tbl_timesheet ts on pr.id_perusahaan = ts.id_perusahaan 
+		("select concat('$bulantext[$bulanmulai] - $bulantext[$bulanselesai] $tahun')periode, pr.id_perusahaan, nama_perusahaan, sum(total_jamkerja)tjaker,sum(total_lembur)tlembur, sum(total_ope) tope from tbl_perusahaan pr join tbl_timesheet ts on pr.id_perusahaan = ts.id_perusahaan 
 			where bulan>=$bulanmulai && bulan<=$bulanselesai && tahun =$tahun && pr.id_perusahaan='$idperusahaan' ");
 		return $query->row_array();
 	}
@@ -36,9 +36,9 @@ class evaluasi_m extends CI_Model {
 	{
 		
 		$query=$this->db->query
-		("select ts.npwp,nama_user,total_jamkerja,total_lembur,total_ope from tbl_user us join tbl_timesheet ts
+		("select ts.npwp,nama_user,sum(total_jamkerja) total_jamkerja,sum(total_lembur) total_lembur,sum(total_ope) total_ope from tbl_user us join tbl_timesheet ts
 			on us.npwp=ts.npwp 
-			where id_perusahaan='$idperusahaan' && bulan>=$bulanmulai && bulan<=$bulanselesai && tahun=$tahun group by ts.npwp");
+			where id_perusahaan='$idperusahaan' && bulan>=$bulanmulai && bulan<=$bulanselesai && tahun=$tahun group by us.npwp");
 		return $query->result_array();
 	}
 

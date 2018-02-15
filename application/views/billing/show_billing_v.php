@@ -136,7 +136,7 @@
 		          </div>
 		        </div>
 		        <div class="form-group">
-		          <label for="Nama Perusahaan" class="col-sm-2 control-label">Periode</label>
+		          <label for="Nama Perusahaan" class="col-sm-2 control-label">Tanggal Mulai</label>
 		          <div class="col-sm-4">
 		            <input type="text" class="form-control" name="periode" readonly>
 		          </div>
@@ -155,32 +155,7 @@
 		        </form>
 		        <div class="tab-content">
 			  		<div id="tab1" class="tab-pane fade in active">
-		        <!-- <form class="form-horizontal">
 		        
-		        <div class="form-group">
-		          <label for="Nama Perusahaan" class="col-sm-2 control-label">Total Transport Lembur</label>
-		          <div class="col-sm-1">Rp. </div>
-		          <div class="col-sm-3">
-		            <input type="text" class="form-control number-format" name="tottranslembur" readonly>
-		          </div>
-		        </div>
-		        <div class="form-group">
-		          <label for="Nama Perusahaan" class="col-sm-2 control-label">Total Uang Makan</label>
-		          <div class="col-sm-1">Rp. </div>
-		          <div class="col-sm-3">
-		            <input type="text" class="form-control number-format" name="totuangmakan" readonly>
-		          </div>
-		        </div>
-		        <div class="form-group">
-		          <label for="Nama Perusahaan" class="col-sm-2 control-label">Total OPE</label>
-		          <div class="col-sm-1">Rp. </div>
-		          <div class="col-sm-3">
-		            <input type="text" class="form-control number-format" name="totope" readonly>
-		          </div>
-		        </div>
-						
-						<br>
-				  </form> -->
 					<div class="table-responsive">
 						<table class="table table-striped table-hover table-detail" width="100%">
 							<thead>
@@ -305,9 +280,6 @@ $('.table-dikerjakan,.table-selesai').on('click','.btn-detail',function(){
 			$('.modal-detail input[name=namaperusahaan]').val(data.nama_perusahaan);
 			$('.modal-detail input[name=periode]').val(data.periode);
 			$('.modal-detail input[name=fee]').val(data.fee);
-			$('.modal-detail input[name=tottranslembur]').val(data.tottranslembur);
-			$('.modal-detail input[name=totuangmakan]').val(data.totuangmakan);
-			$('.modal-detail input[name=totope]').val(data.totope);
 
 			// button print
 			var urldetail="<?= base_url('billing/printpage/detail?idjob=')?>"+data.id_job+"&"+$('.form-date').serialize();

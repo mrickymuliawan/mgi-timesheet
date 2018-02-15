@@ -24,8 +24,7 @@ class Job extends CI_Controller {
 			$r[]=$value['job_number'];
 			$r[]=$value['nama_perusahaan'];
 			$r[]=$value['tanggal_mulai'];
-			// $r[]="<span class='number-format2'>Rp. $value[total_transport_lembur]</span>";
-			// $r[]="<span class='number-format2'>Rp. $value[total_ope]</span>";
+			$r[]="Rp. ".number_format("$value[fee]",0,',','.');
 
 			$r[]="<button class='btn btn-outline-info btn-sm btn-edit' value='$value[id_job]'
 						data-toggle='popover' data-placement='top' data-content='Edit'>
@@ -57,8 +56,7 @@ class Job extends CI_Controller {
 			$r[]=$value['job_number'];
 			$r[]=$value['nama_perusahaan'];
 			$r[]=$value['tanggal_mulai'];
-			// $r[]="<span class='number-format2'>Rp. $value[total_transport_lembur]</span>";
-			// $r[]="<span class='number-format2'>Rp. $value[total_ope]</span>";
+			$r[]="Rp. ".number_format("$value[fee]",0,',','.');
 
 			$r[]="<button class='btn btn-outline-info btn-sm btn-edit' value='$value[id_job]'>
 							<i class='fa fa-edit'></i>
@@ -105,12 +103,14 @@ class Job extends CI_Controller {
 		$tanggalmulai=date('Y/m/d',strtotime($this->input->get_post('tanggalmulai')));
 		$idperusahaan=$this->input->get_post('idperusahaan');
 		$namaperusahaan=$this->input->get_post('namaperusahaan');
+		$fee=$this->input->get_post('fee');
 		$status=$this->input->get_post('status');
 		$data = array(
 									'job_number' => $jobnumber,
 									'tanggal_mulai' => $tanggalmulai,
 									'id_perusahaan' => $idperusahaan,
 									'nama_perusahaan' => $namaperusahaan,
+									'fee' => $fee,
 									'status' => $status);
 		$this->job_m->insert($data);
 	}
@@ -131,12 +131,14 @@ class Job extends CI_Controller {
 		$tanggalmulai=date('Y/m/d',strtotime($this->input->get_post('tanggalmulai')));
 		$idperusahaan=$this->input->get_post('idperusahaan');
 		$namaperusahaan=$this->input->get_post('namaperusahaan');
+		$fee=$this->input->get_post('fee');
 		$status=$this->input->get_post('status');
 		$data = array('id_job' => $id,
 									'job_number' => $jobnumber,
 									'tanggal_mulai' => $tanggalmulai,
 									'status' => $status,
 									'id_perusahaan' => $idperusahaan,
+									'fee' => $fee,
 									'nama_perusahaan' => $namaperusahaan,);
 		$this->db->where('id_job', $id);
 		$this->db->update('tbl_timesheet', array('id_perusahaan' => $idperusahaan));

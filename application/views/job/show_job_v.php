@@ -68,8 +68,7 @@
 									<th>Job Number</th>
 									<th>Nama Perusahaan</th>
 									<th>Tanggal Mulai</th>
-								<!-- 	<th>Total Transport Lembur</th>
-									<th>Total OPE</th> -->
+									<th>Fee</th>
 									<th>Tools</th>
 								</tr>
 							</thead>
@@ -88,8 +87,7 @@
 									<th>Job Number</th>
 									<th>Nama Perusahaan</th>
 									<th>Tanggal Mulai</th>
-<!-- 									<th>Total Transport Lembur</th>
-									<th>Total OPE</th> -->
+									<th>Fee</th>
 									<th>Tools</th>
 								</tr>
 							</thead>
@@ -128,32 +126,21 @@
           </div>
         </div>
 
-        <!-- <div class="form-group">
-	       	<label class="control-label col-sm-3">Bulan: </label>
-					<div class="col-md-9">
-						<select class="form-control" name="bulan">
-							<option value="1">Januari</option>
-							<option value="2">Februari</option>
-							<option value="3">Maret</option>
-							<option value="4">April</option>
-							<option value="5">Mei</option>
-							<option value="6">Juni</option>
-							<option value="7">Juli</option>
-							<option value="8">Agustus</option>
-							<option value="9">September</option>
-							<option value="10">Oktober</option>
-							<option value="11">November</option>
-							<option value="12">Desember</option>
-						</select>
-					</div>
-				</div> -->
-
 				<div class="form-group">
 					<label class="control-label col-sm-3">Tanggal Mulai: </label>
 					<div class="col-md-9">
 						<input type="text" name="tanggalmulai" class="form-control">
 					</div>
 				</div>
+				<div class="form-group">
+          <label class="col-sm-3 control-label">Fee</label>
+          <div class="col-sm-1">
+            Rp.
+          </div>
+          <div class="col-sm-8">
+            <input type="text" class="form-control number-format" name="fee">
+          </div>
+        </div>
 				<br>
 
 				<div class="form-group">
@@ -179,15 +166,6 @@
 
           <div class="col-sm-9">
             <input type="text" class="form-control" name="jumlahkota" readonly="">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-3 control-label">Fee</label>
-          <div class="col-sm-1">
-            Rp.
-          </div>
-          <div class="col-sm-8">
-            <input type="text" class="form-control number-format" name="fee" readonly="">
           </div>
         </div>
         
@@ -248,8 +226,17 @@
 						<input type="text" name="tanggalmulai" class="form-control">
 					</div>
 				</div>
+				<div class="form-group">
+          <label class="col-sm-3 control-label">Fee</label>
+          <div class="col-sm-1">
+            Rp.
+          </div>
+          <div class="col-sm-8">
+            <input type="text" class="form-control number-format" name="fee">
+          </div>
+        </div>
 				<br>
-
+				
 				<div class="form-group">
           <label class="col-sm-3 control-label">Search</label>
 
@@ -275,15 +262,7 @@
             <input type="text" class="form-control" name="jumlahkota" readonly="">
           </div>
         </div>
-        <div class="form-group">
-          <label class="col-sm-3 control-label">Fee</label>
-          <div class="col-sm-1">
-            Rp.
-          </div>
-          <div class="col-sm-8">
-            <input type="text" class="form-control number-format" name="fee" readonly="">
-          </div>
-        </div>
+        
         <div class="form-group">
           <label class="col-sm-3 control-label">Status</label>
           <div class="col-sm-9">
@@ -371,8 +350,7 @@ function autocomplete(modal){
 				$(modal+' input[name=searchperusahaan]').val("");
 				$(modal+' input[name=idperusahaan]').val(data.id_perusahaan);
 				$(modal+' input[name=namaperusahaan]').val(data.nama_perusahaan)
-				$(modal+' input[name=jumlahkota]').val(data.jumlah_kota);
-				$(modal+' input[name=fee]').val(data.fee);		
+				$(modal+' input[name=jumlahkota]').val(data.jumlah_kota);	
 			}
 		})
 	}
@@ -436,6 +414,9 @@ $('.btn-add').on('click',function(){
 		tanggalmulai:{
 			required:true
 		},
+		fee:{
+			required:true
+		},
 		namaperusahaan:{
 			required:true
 		}
@@ -472,7 +453,7 @@ $('.table-dikerjakan,.table-selesai').on('click','.btn-edit',function(){
 			$('.modal-edit-job input[name=jobnumber]').val(data.job_number);
 			$('.modal-edit-job input[name=tanggalmulai]').val(data.tanggal_mulai);
 			$('.modal-edit-job input[name=namaperusahaan]').val(data.nama_perusahaan);
-			$('.modal-edit-job input[name=kota]').val(data.jumlah_kota);
+			$('.modal-edit-job input[name=jumlahkota]').val(data.jumlah_kota);
 			$('.modal-edit-job input[name=fee]').val(data.fee);
 			$('.modal-edit-job select[name=status]').val(data.status);
 		  $('.modal-edit-job').modal('show');
@@ -489,6 +470,9 @@ $('.table-dikerjakan,.table-selesai').on('click','.btn-edit',function(){
 			required:true
 		},
 		tanggalmulai:{
+			required:true
+		},
+		fee:{
 			required:true
 		},
 		namaperusahaan:{

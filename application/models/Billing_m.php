@@ -25,9 +25,8 @@ class billing_m extends CI_Model {
 	}
 	 function gettotal($id){
 	 	$query=$this->db->query
-		("select sum(total_ope)totope,sum(total_transport_lembur)tottranslembur,sum(total_uang_makan)totuangmakan, fee 
-		from tbl_timesheet ts
-		inner join tbl_perusahaan pr on ts.id_perusahaan=pr.id_perusahaan
+		("select COALESCE(sum(total_ope),0) totope,COALESCE(sum(total_transport_lembur),0) tottranslembur,COALESCE(sum(total_uang_makan),0) totuangmakan 
+		from tbl_timesheet
 		where id_job='$id'");
 		return $query->row_array();
 	 }
@@ -48,13 +47,10 @@ class billing_m extends CI_Model {
 											'12' => 'Desember');
 
 		$query=$this->db->query
-		("select jb.id_job,DATE_FORMAT(tanggal_mulai,'%d %M %Y')periode,jb.nama_perusahaan,fee,job_number,sum(total_ope)totope,sum(total_transport_lembur)tottranslembur,sum(total_uang_makan)totuangmakan 
-			from tbl_job jb
-			inner join tbl_timesheet ts
-			on jb.id_job=ts.id_job
-			inner join tbl_perusahaan pr
-			on pr.id_perusahaan=ts.id_perusahaan
-			where jb.id_job='$idjob' ");
+		("select id_job,DATE_FORMAT(tanggal_mulai,'%d %M %Y')periode,nama_perusahaan,fee,job_number
+			from tbl_job 
+			
+			where id_job='$idjob' ");
 		return $query->row_array();
 	}
 

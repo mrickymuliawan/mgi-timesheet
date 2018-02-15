@@ -25,7 +25,6 @@ class Evaluasi extends CI_Controller {
 			$r=array();
 			$r[]=$key+1;
 			$r[]=$value['nama_perusahaan'];
-			$r[]="Rp. ".number_format("$value[fee]",0,',','.');
 			$r[]=number_format("$value[tjaker]",0,',','.');
 			$r[]=number_format("$value[tlembur]",0,',','.');
 			$r[]="Rp. ".number_format("$value[tope]",0,',','.');
